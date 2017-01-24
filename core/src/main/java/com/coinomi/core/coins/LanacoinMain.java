@@ -7,7 +7,7 @@ import com.coinomi.core.coins.families.PeerFamily;
  */
 public class LanacoinMain extends PeerFamily {
     private LanacoinMain() {
-        id = "nevacoin.main";
+        id = "lanacoin.main";
 
         addressHeader = 48;
         p2shHeader = 5;

@@ -24,7 +24,7 @@ public class AquariuscoinMain extends PeerFamily {
         minNonDust = value(1);
         softDustLimit = value(1000000); // 0.01 ARCO
         softDustPolicy = SoftDustPolicy.AT_LEAST_BASE_FEE_IF_SOFT_DUST_TXO_PRESENT;
-        signedMessageHeader = toBytes("NevaCoin Signed Message:\n");
+        signedMessageHeader = toBytes("AquariusCoin Signed Message:\n");
     }
 
     private static AquariuscoinMain instance = new AquariuscoinMain();
