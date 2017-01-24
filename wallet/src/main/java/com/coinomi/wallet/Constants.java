@@ -215,9 +215,9 @@ public class Constants {
             new CoinAddress(RichcoinMain.get(),     new ServerAddress("richx-cce-1.coinomi.net", 5046),
                                                     new ServerAddress("richx-cce-2.coinomi.net", 5046)),
             new CoinAddress(IxcoinMain.get(),       new ServerAddress("ixc-cce-1.coinomi.net", 5047),
-                                                    new ServerAddress("ixc-cce-2.coinomi.net", 5047))
-            new CoinAddress(NevacoinMain.get(),     new ServerAddress("electrum1.nevacoin.net", 5048),
-                                                    new ServerAddress("electrum2.nevacoin.net", 5048))
+                                                    new ServerAddress("ixc-cce-2.coinomi.net", 5047)),
+            new CoinAddress(NevacoinMain.get(),     new ServerAddress("electrum1.nevacoin.net", 5096),
+                                                    new ServerAddress("electrum2.nevacoin.net", 5096))
     );
 
     public static final HashMap<CoinType, Integer> COINS_ICONS;
