@@ -48,6 +48,7 @@ import com.coinomi.core.coins.VpncoinMain;
 import com.coinomi.core.coins.RichcoinMain;
 import com.coinomi.core.coins.IxcoinMain;
 import com.coinomi.core.coins.NevacoinMain;
+import com.coinomi.core.coins.NetkoMain;
 import com.coinomi.core.coins.AquariuscoinMain;
 import com.coinomi.core.coins.LanacoinMain;
 import com.coinomi.core.coins.TajcoinMain;
@@ -223,6 +224,10 @@ public class Constants {
                                                     new ServerAddress("node2.cryptowallet.si", 5096),
                                                     new ServerAddress("node3.cryptowallet.si", 5096),
                                                     new ServerAddress("node4.cryptowallet.si", 5096)),
+            new CoinAddress(NetkoMain.get(),        new ServerAddress("node1.cryptowallet.si", 5099),
+                                                    new ServerAddress("node2.cryptowallet.si", 5099),
+                                                    new ServerAddress("node3.cryptowallet.si", 5099),
+                                                    new ServerAddress("node4.cryptowallet.si", 5099)),
             new CoinAddress(AquariuscoinMain.get(), new ServerAddress("node1.cryptowallet.si", 5095),
                                                     new ServerAddress("node2.cryptowallet.si", 5095),
                                                     new ServerAddress("node3.cryptowallet.si", 5095),
@@ -285,6 +290,7 @@ public class Constants {
         COINS_ICONS.put(CoinID.RICHCOIN_MAIN.getCoinType(), R.drawable.richcoin);
         COINS_ICONS.put(CoinID.IXCOIN_MAIN.getCoinType(), R.drawable.ixcoin);
         COINS_ICONS.put(CoinID.NEVACOIN_MAIN.getCoinType(), R.drawable.nevacoin);
+        COINS_ICONS.put(CoinID.NETKO_MAIN.getCoinType(), R.drawable.netko);
         COINS_ICONS.put(CoinID.AQUARIUSCOIN_MAIN.getCoinType(), R.drawable.aquariuscoin);
         COINS_ICONS.put(CoinID.LANACOIN_MAIN.getCoinType(), R.drawable.lanacoin);
         COINS_ICONS.put(CoinID.TAJCOIN_MAIN.getCoinType(), R.drawable.tajcoin);
@@ -331,6 +337,7 @@ public class Constants {
         COINS_BLOCK_EXPLORERS.put(CoinID.RICHCOIN_MAIN.getCoinType(), "https://explorer.richcoin.us/transaction?transaction=%s");
         COINS_BLOCK_EXPLORERS.put(CoinID.IXCOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/ixc/tx.dws?%s");
         COINS_BLOCK_EXPLORERS.put(CoinID.NEVACOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/neva/tx.dws?%s");
+        COINS_BLOCK_EXPLORERS.put(CoinID.NETKO_MAIN.getCoinType(), "https://chainz.cryptoid.info/netko/tx.dws?%s");
         COINS_BLOCK_EXPLORERS.put(CoinID.AQUARIUSCOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/arco/tx.dws?%s");
         COINS_BLOCK_EXPLORERS.put(CoinID.LANACOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/lana/tx.dws?%s");
         COINS_BLOCK_EXPLORERS.put(CoinID.TAJCOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/taj/tx.dws?%s");
@@ -372,6 +379,7 @@ public class Constants {
             NamecoinMain.get(),
             NeoscoinMain.get(),
             NevacoinMain.get(),
+            NetkoMain.get(),
             NovacoinMain.get(),
             NuBitsMain.get(),
             NuSharesMain.get(),

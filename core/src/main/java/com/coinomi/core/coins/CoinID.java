@@ -65,6 +65,7 @@ public enum CoinID {
     RICHCOIN_MAIN(RichcoinMain.get()),
     IXCOIN_MAIN(IxcoinMain.get()),
     NEVACOIN_MAIN(NevacoinMain.get()),
+    NETKO_MAIN(NetkoMain.get()),
     AQUARIUSCOIN_MAIN(AquariuscoinMain.get()),
     LANACOIN_MAIN(LanacoinMain.get()),
     TAJCOIN_MAIN(TajcoinMain.get()),
