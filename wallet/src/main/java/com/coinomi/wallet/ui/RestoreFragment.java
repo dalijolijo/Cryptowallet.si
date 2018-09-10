@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.coinomi.core.CoreUtils;
 import com.coinomi.wallet.Constants;
 import com.coinomi.wallet.R;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.util.Fonts;
 import com.coinomi.wallet.util.Keyboard;
 
@@ -40,7 +41,7 @@ import javax.annotation.Nullable;
  * A simple {@link Fragment} subclass.
  *
  */
-public class RestoreFragment extends Fragment {
+public class RestoreFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(RestoreFragment.class);
     private static final int REQUEST_CODE_SCAN = 0;
 

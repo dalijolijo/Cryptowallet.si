@@ -16,7 +16,7 @@ import com.coinomi.wallet.ExchangeRatesProvider.ExchangeRate;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.util.WalletUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -24,9 +24,9 @@ import butterknife.ButterKnife;
  */
 public class CoinListItem extends LinearLayout implements Checkable {
     final View view;
-    @Bind(R.id.item_icon) ImageView icon;
-    @Bind(R.id.item_text) TextView title;
-    @Bind(R.id.amount) Amount amount;
+    @BindView(R.id.item_icon) ImageView icon;
+    @BindView(R.id.item_text) TextView title;
+    @BindView(R.id.amount) Amount amount;
 
     private boolean isChecked = false;
     private CoinType type;

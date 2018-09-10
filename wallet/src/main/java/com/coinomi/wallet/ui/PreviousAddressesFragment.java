@@ -21,6 +21,7 @@ import com.coinomi.wallet.AddressBookProvider;
 import com.coinomi.wallet.Constants;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.util.ThrottlingWalletChangeListener;
 import com.coinomi.wallet.util.WeakHandler;
 
@@ -30,7 +31,7 @@ import org.slf4j.LoggerFactory;
 /**
  *
  */
-public class PreviousAddressesFragment extends Fragment {
+public class PreviousAddressesFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(PreviousAddressesFragment.class);
 
     private static final int UPDATE_VIEW = 0;

@@ -20,6 +20,7 @@ import com.coinomi.wallet.Constants;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
 import com.coinomi.wallet.tasks.SignVerifyMessageTask;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.util.Keyboard;
 
 import org.slf4j.Logger;
@@ -36,7 +37,7 @@ import static com.coinomi.core.Preconditions.checkState;
  *
  * @author John L. Jegutanis
  */
-public class SignVerifyMessageFragment extends Fragment {
+public class SignVerifyMessageFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(SignVerifyMessageFragment.class);
 
     private static final String PASSWORD_DIALOG_TAG = "password_dialog_tag";

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.coinomi.wallet.R;
+import com.coinomi.wallet.ui.common.BaseFragment;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,7 @@ import org.slf4j.LoggerFactory;
 /**
  *
  */
-public class WelcomeFragment extends Fragment {
+public class WelcomeFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(WelcomeFragment.class);
 
     private Listener listener;

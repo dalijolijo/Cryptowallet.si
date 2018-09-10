@@ -20,6 +20,7 @@ import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
 import com.coinomi.wallet.service.CoinService;
 import com.coinomi.wallet.service.CoinServiceImpl;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.util.WeakHandler;
 
 import org.bitcoinj.crypto.KeyCrypterScrypt;
@@ -36,7 +37,7 @@ import javax.annotation.Nullable;
 /**
  * Fragment that restores a wallet
  */
-public class FinalizeWalletRestorationFragment extends Fragment {
+public class FinalizeWalletRestorationFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(FinalizeWalletRestorationFragment.class);
 
     private static final int RESTORE_STATUS_UPDATE = 0;

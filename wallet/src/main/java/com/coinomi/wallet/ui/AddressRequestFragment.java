@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -82,11 +82,11 @@ public class AddressRequestFragment extends WalletFragment {
     private WalletAccount account;
     private String message;
 
-    @Bind(R.id.request_address_label) TextView addressLabelView;
-    @Bind(R.id.request_address) TextView addressView;
-    @Bind(R.id.request_coin_amount) AmountEditView sendCoinAmountView;
-    @Bind(R.id.view_previous_addresses) View previousAddressesLink;
-    @Bind(R.id.qr_code) ImageView qrView;
+    @BindView(R.id.request_address_label) TextView addressLabelView;
+    @BindView(R.id.request_address) TextView addressView;
+    @BindView(R.id.request_coin_amount) AmountEditView sendCoinAmountView;
+    @BindView(R.id.view_previous_addresses) View previousAddressesLink;
+    @BindView(R.id.qr_code) ImageView qrView;
     String lastQrContent;
     CurrencyCalculatorLink amountCalculatorLink;
     ContentResolver resolver;
@@ -178,7 +178,7 @@ public class AddressRequestFragment extends WalletFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_request, container, false);
-        ButterKnife.bind(this, view);
+        setBinder(ButterKnife.bind(this, view));
 
         sendCoinAmountView.resetType(type, true);
 
@@ -202,7 +202,6 @@ public class AddressRequestFragment extends WalletFragment {
     public void onDestroyView() {
         amountCalculatorLink = null;
         lastQrContent = null;
-        ButterKnife.unbind(this);
         super.onDestroyView();
     }
 

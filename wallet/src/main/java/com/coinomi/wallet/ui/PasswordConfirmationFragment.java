@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.coinomi.wallet.Constants;
 import com.coinomi.wallet.R;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.util.Fonts;
 import com.coinomi.wallet.util.Keyboard;
 
@@ -25,7 +26,7 @@ import javax.annotation.Nullable;
  * create an instance of this fragment.
  *
  */
-public class PasswordConfirmationFragment extends Fragment {
+public class PasswordConfirmationFragment extends BaseFragment {
     @Nullable private String message;
     private Listener listener;
 

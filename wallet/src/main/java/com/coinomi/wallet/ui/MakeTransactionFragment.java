@@ -44,6 +44,7 @@ import com.coinomi.wallet.ExchangeHistoryProvider.ExchangeEntry;
 import com.coinomi.wallet.ExchangeRatesProvider;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.ui.widget.SendOutput;
 import com.coinomi.wallet.ui.widget.TransactionAmountVisualizer;
 import com.coinomi.wallet.util.Keyboard;
@@ -58,7 +59,7 @@ import java.util.HashMap;
 
 import javax.annotation.Nullable;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -77,7 +78,7 @@ import static com.coinomi.wallet.ExchangeRatesProvider.getRates;
  * This fragment displays a busy message and makes the transaction in the background
  *
  */
-public class MakeTransactionFragment extends Fragment {
+public class MakeTransactionFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(MakeTransactionFragment.class);
 
     private static final int START_TRADE_TIMEOUT = 0;
@@ -128,10 +129,10 @@ public class MakeTransactionFragment extends Fragment {
     private HashMap<String, ExchangeRate> localRates = new HashMap<>();
     private CountDownTimer countDownTimer;
 
-    @Bind(R.id.transaction_info) TextView transactionInfo;
-    @Bind(R.id.password) EditText passwordView;
-    @Bind(R.id.transaction_amount_visualizer) TransactionAmountVisualizer txVisualizer;
-    @Bind(R.id.transaction_trade_withdraw) SendOutput tradeWithdrawSendOutput;
+    @BindView(R.id.transaction_info) TextView transactionInfo;
+    @BindView(R.id.password) EditText passwordView;
+    @BindView(R.id.transaction_amount_visualizer) TransactionAmountVisualizer txVisualizer;
+    @BindView(R.id.transaction_trade_withdraw) SendOutput tradeWithdrawSendOutput;
 
     public static MakeTransactionFragment newInstance(Bundle args) {
         MakeTransactionFragment fragment = new MakeTransactionFragment();
@@ -212,7 +213,7 @@ public class MakeTransactionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_make_transaction, container, false);
-        ButterKnife.bind(this, view);
+        setBinder(ButterKnife.bind(this, view));
 
         if (error != null) return view;
 
@@ -245,12 +246,6 @@ public class MakeTransactionFragment extends Fragment {
         poweredByShapeShift.setVisibility((isExchangeNeeded() ? View.VISIBLE : View.GONE));
 
         return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     @OnClick(R.id.button_confirm)

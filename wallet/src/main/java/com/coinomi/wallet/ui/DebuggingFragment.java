@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.coinomi.core.wallet.Wallet;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
+import com.coinomi.wallet.ui.common.BaseFragment;
 
 import org.bitcoinj.core.Sha256Hash;
 import org.bitcoinj.crypto.DeterministicKey;
@@ -35,7 +36,7 @@ import static com.coinomi.core.Preconditions.checkNotNull;
 /**
  * @author John L. Jegutanis
  */
-public class DebuggingFragment extends Fragment {
+public class DebuggingFragment extends BaseFragment {
     private static final String PROCESSING_DIALOG_TAG = "processing_dialog_tag";
     private static final String PASSWORD_DIALOG_TAG = "password_dialog_tag";
 
@@ -54,15 +55,9 @@ public class DebuggingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_debugging, container, false);
-        ButterKnife.bind(this, view);
+        setBinder(ButterKnife.bind(this, view));
 
         return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        ButterKnife.unbind(this);
-        super.onDestroyView();
     }
 
     @Override

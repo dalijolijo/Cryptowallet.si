@@ -23,6 +23,7 @@ import com.coinomi.wallet.ExchangeRatesProvider;
 import com.coinomi.wallet.ExchangeRatesProvider.ExchangeRate;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.ui.widget.HeaderWithFontIcon;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
@@ -37,7 +38,7 @@ import static com.coinomi.wallet.ExchangeRatesProvider.getRates;
 /**
  * Fragment that restores a wallet
  */
-public class SelectCoinsFragment extends Fragment {
+public class SelectCoinsFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(SelectCoinsFragment.class);
     private Listener listener;
     private String message;

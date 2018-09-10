@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.coinomi.core.wallet.Wallet;
 import com.coinomi.wallet.Constants;
 import com.coinomi.wallet.R;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.util.Fonts;
 
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Generates and shows a new passphrase
  */
-public class SeedFragment extends Fragment {
+public class SeedFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(SeedFragment.class);
 
     private WelcomeFragment.Listener listener;

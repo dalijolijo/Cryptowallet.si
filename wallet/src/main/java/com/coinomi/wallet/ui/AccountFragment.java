@@ -22,6 +22,7 @@ import com.coinomi.core.wallet.WalletAccount;
 import com.coinomi.wallet.Constants;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.util.Keyboard;
 import com.coinomi.wallet.util.WeakHandler;
 
@@ -30,7 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.coinomi.wallet.util.UiUtils.toastGenericError;
@@ -38,7 +39,7 @@ import static com.coinomi.wallet.util.UiUtils.toastGenericError;
 /**
  * @author John L. Jegutanis
  */
-public class AccountFragment extends Fragment {
+public class AccountFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(AccountFragment.class);
 
     private static final String ACCOUNT_CURRENT_SCREEN = "account_current_screen";
@@ -56,7 +57,7 @@ public class AccountFragment extends Fragment {
     private static final int SEND_TO_URI = 0;
 
     private int currentScreen;
-    @Bind(R.id.pager) ViewPager viewPager;
+    @BindView(R.id.pager) ViewPager viewPager;
     NavigationDrawerFragment mNavigationDrawerFragment;
     @Nullable private WalletAccount account;
     private Listener listener;
@@ -91,7 +92,7 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
-        ButterKnife.bind(this, view);
+        setBinder(ButterKnife.bind(this, view));
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -131,7 +132,6 @@ public class AccountFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        ButterKnife.unbind(this);
         mNavigationDrawerFragment = null;
         super.onDestroyView();
     }

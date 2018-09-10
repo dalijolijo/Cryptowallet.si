@@ -30,6 +30,7 @@ import com.coinomi.core.wallet.families.bitcoin.BitTransaction;
 import com.coinomi.wallet.Constants;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.util.Keyboard;
 import com.coinomi.wallet.util.WeakHandler;
 
@@ -40,7 +41,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
@@ -56,7 +57,7 @@ import static com.coinomi.wallet.util.UiUtils.setVisible;
  * A simple {@link Fragment} subclass.
  *
  */
-public class SweepWalletFragment extends Fragment {
+public class SweepWalletFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(SweepWalletFragment.class);
 
     private static final int REQUEST_CODE_SCAN = 0;
@@ -78,14 +79,14 @@ public class SweepWalletFragment extends Fragment {
     private Error error = Error.NONE;
     private TxStatus status = TxStatus.INITIAL;
 
-    @Bind(R.id.private_key_input) View privateKeyInputView;
-    @Bind(R.id.sweep_wallet_key) EditText privateKeyText;
-    @Bind(R.id.passwordView) View passwordView;
-    @Bind(R.id.sweep_error) TextView errorΜessage;
-    @Bind(R.id.passwordInput) EditText password;
-    @Bind(R.id.sweep_loading) View sweepLoadingView;
-    @Bind(R.id.sweeping_status) TextView sweepStatus;
-    @Bind(R.id.button_next) Button nextButton;
+    @BindView(R.id.private_key_input) View privateKeyInputView;
+    @BindView(R.id.sweep_wallet_key) EditText privateKeyText;
+    @BindView(R.id.passwordView) View passwordView;
+    @BindView(R.id.sweep_error) TextView errorΜessage;
+    @BindView(R.id.passwordInput) EditText password;
+    @BindView(R.id.sweep_loading) View sweepLoadingView;
+    @BindView(R.id.sweeping_status) TextView sweepStatus;
+    @BindView(R.id.button_next) Button nextButton;
 
     public SweepWalletFragment() { }
 
@@ -135,7 +136,7 @@ public class SweepWalletFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sweep, container, false);
-        ButterKnife.bind(this, view);
+        setBinder(ButterKnife.bind(this, view));
 
         if (getArguments().containsKey(Constants.ARG_PRIVATE_KEY)) {
             privateKeyText.setText(getArguments().getString(Constants.ARG_PRIVATE_KEY));
@@ -155,12 +156,6 @@ public class SweepWalletFragment extends Fragment {
         super.onResume();
         validatePrivateKey();
         updateView();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     @Override

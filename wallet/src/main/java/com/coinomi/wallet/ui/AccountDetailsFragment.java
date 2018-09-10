@@ -14,6 +14,7 @@ import com.coinomi.core.wallet.WalletAccount;
 import com.coinomi.wallet.Constants;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.util.QrUtils;
 import com.coinomi.wallet.util.UiUtils;
 
@@ -22,7 +23,7 @@ import static com.coinomi.core.Preconditions.checkNotNull;
 /**
  * @author John L. Jegutanis
  */
-public class AccountDetailsFragment extends Fragment {
+public class AccountDetailsFragment extends BaseFragment {
     private String publicKeySerialized;
 
     public static AccountDetailsFragment newInstance(WalletAccount account) {

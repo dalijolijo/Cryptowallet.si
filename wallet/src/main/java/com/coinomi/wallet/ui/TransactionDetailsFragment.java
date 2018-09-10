@@ -23,6 +23,7 @@ import com.coinomi.core.wallet.AbstractWallet;
 import com.coinomi.wallet.Constants;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.util.ThrottlingWalletChangeListener;
 import com.coinomi.wallet.util.TimeUtils;
 import com.coinomi.wallet.util.UiUtils;
@@ -36,7 +37,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Fragment that restores a wallet
  */
-public class TransactionDetailsFragment extends Fragment {
+public class TransactionDetailsFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(TransactionDetailsFragment.class);
 
     private static final int UPDATE_VIEW = 0;

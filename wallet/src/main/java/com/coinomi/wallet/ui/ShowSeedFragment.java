@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.coinomi.core.wallet.Wallet;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.util.Fonts;
 import com.coinomi.wallet.util.QrUtils;
 import com.coinomi.wallet.util.WeakHandler;
@@ -33,7 +34,7 @@ import static com.coinomi.core.Preconditions.checkState;
 /**
  * @author John L. Jegutanis
  */
-public class ShowSeedFragment extends Fragment {
+public class ShowSeedFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(ShowSeedFragment.class);
 
     private static final int UPDATE_VIEW = 0;

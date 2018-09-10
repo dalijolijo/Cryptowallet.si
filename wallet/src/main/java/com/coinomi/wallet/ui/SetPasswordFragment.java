@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.coinomi.wallet.Constants;
 import com.coinomi.wallet.R;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.util.Fonts;
 import com.coinomi.wallet.util.Keyboard;
 import com.coinomi.wallet.util.PasswordQualityChecker;
@@ -29,7 +30,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Fragment that sets a password
  */
-public class SetPasswordFragment extends Fragment {
+public class SetPasswordFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(SetPasswordFragment.class);
 
     private Listener listener;

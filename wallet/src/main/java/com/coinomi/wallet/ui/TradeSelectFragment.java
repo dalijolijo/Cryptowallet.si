@@ -37,6 +37,7 @@ import com.coinomi.wallet.tasks.AddCoinTask;
 import com.coinomi.wallet.tasks.ExchangeCheckSupportedCoinsTask;
 import com.coinomi.wallet.tasks.MarketInfoPollTask;
 import com.coinomi.wallet.ui.adaptors.AvailableAccountsAdaptor;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.ui.dialogs.ConfirmAddCoinUnlockWalletDialog;
 import com.coinomi.wallet.ui.widget.AmountEditView;
 import com.coinomi.wallet.util.Keyboard;
@@ -62,7 +63,7 @@ import static com.coinomi.core.coins.Value.canCompare;
 /**
  * @author John L. Jegutanis
  */
-public class TradeSelectFragment extends Fragment implements ExchangeCheckSupportedCoinsTask.Listener, AddCoinTask.Listener {
+public class TradeSelectFragment extends BaseFragment implements ExchangeCheckSupportedCoinsTask.Listener, AddCoinTask.Listener {
     private static final Logger log = LoggerFactory.getLogger(TradeSelectFragment.class);
 
     private static final int UPDATE_MARKET = 0;

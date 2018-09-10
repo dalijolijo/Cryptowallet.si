@@ -40,6 +40,7 @@ import com.coinomi.wallet.ExchangeHistoryProvider;
 import com.coinomi.wallet.ExchangeHistoryProvider.ExchangeEntry;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.util.Fonts;
 import com.coinomi.wallet.util.WeakHandler;
 
@@ -59,7 +60,7 @@ import static com.coinomi.wallet.util.UiUtils.setVisible;
 /**
  * @author John L. Jegutanis
  */
-public class TradeStatusFragment extends Fragment {
+public class TradeStatusFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(TradeStatusFragment.class);
 
     private static final int UPDATE_SHAPESHIFT_STATUS = 0;

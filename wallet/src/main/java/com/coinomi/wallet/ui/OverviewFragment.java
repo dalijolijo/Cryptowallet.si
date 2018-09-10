@@ -28,6 +28,7 @@ import com.coinomi.wallet.ExchangeRatesProvider.ExchangeRate;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
 import com.coinomi.wallet.ui.adaptors.AccountListAdapter;
+import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.ui.widget.Amount;
 import com.coinomi.wallet.ui.widget.SwipeRefreshLayout;
 import com.coinomi.wallet.util.ThrottlingWalletChangeListener;
@@ -41,7 +42,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
@@ -51,7 +52,7 @@ import butterknife.OnItemLongClick;
  * @author vbcs
  * @author John L. Jegutanis
  */
-public class OverviewFragment extends Fragment{
+public class OverviewFragment extends BaseFragment {
     private static final Logger log = LoggerFactory.getLogger(OverviewFragment.class);
 
     private static final int WALLET_CHANGED = 0;
@@ -93,9 +94,9 @@ public class OverviewFragment extends Fragment{
     Map<String, ExchangeRate> exchangeRates;
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
-    @Bind(R.id.swipeContainer) SwipeRefreshLayout swipeContainer;
-    @Bind(R.id.account_rows) ListView accountRows;
-    @Bind(R.id.account_balance) Amount mainAmount;
+    @BindView(R.id.swipeContainer) SwipeRefreshLayout swipeContainer;
+    @BindView(R.id.account_rows) ListView accountRows;
+    @BindView(R.id.account_balance) Amount mainAmount;
 
     private Listener listener;
 
@@ -131,7 +132,7 @@ public class OverviewFragment extends Fragment{
         View header = inflater.inflate(R.layout.fragment_overview_header, null);
         accountRows = ButterKnife.findById(view, R.id.account_rows);
         accountRows.addHeaderView(header, null, false);
-        ButterKnife.bind(this, view);
+        setBinder(ButterKnife.bind(this, view));
 
         if (wallet == null) {
             return view;
@@ -164,12 +165,6 @@ public class OverviewFragment extends Fragment{
         adapter.setExchangeRates(exchangeRates);
 
         return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     private final ThrottlingWalletChangeListener walletChangeListener = new ThrottlingWalletChangeListener() {
