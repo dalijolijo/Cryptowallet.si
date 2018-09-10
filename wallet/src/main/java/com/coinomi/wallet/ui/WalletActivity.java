@@ -618,7 +618,7 @@ final public class WalletActivity extends BaseWalletActivity implements
             sendSupportEmail();
             return true;
         } else if (id == R.id.action_about) {
-            startActivity(new Intent(WalletActivity.this, AboutActivity.class));
+            startActivity(new Intent(this, AboutActivity.class));
             return true;
         }
 

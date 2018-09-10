@@ -177,7 +177,7 @@
             style="@style/NormalText"
             android:layout_gravity="center_horizontal"
             android:paddingTop="16dp"
-            android:text="@string/about_coinomi_copyright" />
+            android:text="@string/about_cryptowalletsi_copyright" />
 
     </LinearLayout>
 </ScrollView>

@@ -5,11 +5,11 @@ android {
     buildToolsVersion "27.0.3"
 
     defaultConfig {
-        applicationId "com.coinomi.wallet.dev"
+        applicationId "com.cryptowallet.si"
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 56
-        versionName "v1.6.3"
+        versionName "v1.0"
     }
 
     buildTypes {
