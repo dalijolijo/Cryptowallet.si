@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="address_book_provider">com.cryptowallet.si.address_book</string>
+    <string name="exchange_rates_provider">com.cryptowallet.si.exchange_rates</string>
+    <string name="exchange_history_provider">com.cryptowallet.si.exchange_history</string>
+</resources>

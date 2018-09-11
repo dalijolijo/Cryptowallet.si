@@ -103,13 +103,6 @@ public class NavigationDrawerFragment extends BaseFragment {
             }
         });
 
-        view.findViewById(R.id.add_coins).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addCoins();
-            }
-        });
-
         return view;
     }
 
@@ -239,13 +232,6 @@ public class NavigationDrawerFragment extends BaseFragment {
         }
     }
 
-    private void addCoins() {
-        closeDrawer();
-        if (listener != null) {
-            listener.onAddCoinsSelected();
-        }
-    }
-
     @Override
     public void onAttach(final Context context) {
         super.onAttach(context);
@@ -314,7 +300,6 @@ public class NavigationDrawerFragment extends BaseFragment {
      */
     public interface Listener {
         void onAccountSelected(String accountId);
-        void onAddCoinsSelected();
         void onTradeSelected();
         void onOverviewSelected();
     }

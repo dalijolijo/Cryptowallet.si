@@ -63,7 +63,6 @@ final public class WalletActivity extends BaseWalletActivity implements
 
 
     private static final int REQUEST_CODE_SCAN = 0;
-    private static final int ADD_COIN = 1;
 
     private static final int TX_BROADCAST_OK = 0;
     private static final int TX_BROADCAST_ERROR = 1;
@@ -274,11 +273,6 @@ final public class WalletActivity extends BaseWalletActivity implements
     }
 
     @Override
-    public void onAddCoinsSelected() {
-        startActivityForResult(new Intent(WalletActivity.this, AddCoinsActivity.class), ADD_COIN);
-    }
-
-    @Override
     public void onTradeSelected() {
         startActivity(new Intent(WalletActivity.this, TradeActivity.class));
         // Reselect the last item as the trade is a separate activity
@@ -456,13 +450,6 @@ final public class WalletActivity extends BaseWalletActivity implements
                         } catch (final Exception e) {
                             showScanFailedMessage(e);
                         }
-                    }
-                } else if (requestCode == ADD_COIN) {
-                    if (resultCode == Activity.RESULT_OK) {
-                        final String accountId = intent.getStringExtra(Constants.ARG_ACCOUNT_ID);
-                        createNavDrawerItems();
-                        mNavigationDrawerFragment.setItems(navDrawerItems);
-                        openAccount(accountId);
                     }
                 }
             }
