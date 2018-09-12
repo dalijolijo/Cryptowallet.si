@@ -6,17 +6,16 @@
     android:fillViewport="true">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
-
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
 
         <ImageView
             android:id="@+id/imageView"
@@ -28,125 +27,100 @@
             android:src="@drawable/logo" />
 
         <TextView
-            android:id="@+id/textView"
             style="@style/AppNameLong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/app_name_long"
+            android:id="@+id/textView"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="@string/app_name_long" />
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/about_version"
-            style="@style/NormalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView"
-            android:layout_alignStart="@+id/textView"
+            style="@style/NormalText"
+            tools:text="X.Y.Z"
             android:layout_below="@+id/textView"
-            tools:text="X.Y.Z" />
+            android:layout_alignLeft="@+id/textView"
+            android:layout_alignStart="@+id/textView" />
 
         <Button
-            android:id="@+id/terms_of_service_button"
             style="@style/BorderlessButtonLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/terms_of_service_title" />
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--style="@style/NormalText"-->
-        <!--android:autoLink="web"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:text="@string/coinomi_website" />-->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/activity_vertical_margin">
-
-            <TextView
-                android:id="@+id/translation_globe"
-                style="@style/NormalText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingEnd="8dp"
-                android:paddingRight="8dp"
-                android:text="@string/font_icon_language"
-                tools:text="A#" />
-
-            <TextView
-                style="@style/NormalText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/about_credits_translations" />
-        </LinearLayout>
+            android:layout_gravity="center"
+            android:text="@string/contact_us_support" />
 
         <TextView
-            style="@style/NormalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:autoLink="web"
-            android:text="@string/about_credits_translations_credits" />
-
-        <TextView
             style="@style/NormalText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autoLink="web"
+            android:autoLink="email"
             android:paddingTop="14dp"
-            android:text="@string/about_licence" />
+            android:text="@string/contact_us_email" />
 
-        <TextView
-            style="@style/NormalText"
+        <Button
+            style="@style/BorderlessButtonLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_gravity="center"
+            android:text="@string/contact_us_telegram_support" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/NormalText"
             android:autoLink="web"
             android:paddingTop="16dp"
-            android:text="@string/about_credits_bitcoinj" />
+            android:text="@string/contact_us_aquarius_coin" />
 
         <TextView
-            style="@style/NormalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/NormalText"
             android:autoLink="web"
             android:paddingTop="16dp"
-            android:text="@string/about_credits_electrum" />
+            android:text="@string/contact_us_lana_coin" />
 
         <TextView
-            style="@style/NormalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/NormalText"
             android:autoLink="web"
             android:paddingTop="16dp"
-            android:text="@string/about_credits_schildbach" />
+            android:text="@string/contact_us_netko_coin" />
 
         <TextView
-            style="@style/NormalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/NormalText"
             android:autoLink="web"
             android:paddingTop="16dp"
-            android:text="@string/about_credits_zxing" />
+            android:text="@string/contact_us_neva_coin" />
 
         <TextView
-            style="@style/NormalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/NormalText"
             android:autoLink="web"
             android:paddingTop="16dp"
-            android:text="@string/about_credits_font_icons" />
+            android:text="@string/contact_us_taj_coin" />
 
         <TextView
-            style="@style/NormalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/NormalText"
+            android:autoLink="web"
+            android:paddingTop="16dp"
+            android:text="@string/contact_us_ticket_portal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/NormalText"
             android:layout_gravity="center_horizontal"
             android:paddingTop="30dp"
             android:text="@string/about_cryptowalletsi_copyright" />

@@ -176,21 +176,9 @@
                 android:value="com.coinomi.wallet.ui.SettingsActivity" />
         </activity>
         <activity
-            android:name="com.coinomi.wallet.ui.TradeActivity"
-            android:label="@string/title_activity_trade"
-            android:theme="@style/AppTheme" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.coinomi.wallet.ui.WalletActivity" />
-        </activity>
-        <activity
             android:name="com.coinomi.wallet.ui.ExchangeHistoryActivity"
             android:label="@string/title_activity_exchange_history"
-            android:theme="@style/AppTheme" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.coinomi.wallet.ui.TradeActivity" />
-        </activity>
+            android:theme="@style/AppTheme"  />
         <activity
             android:name="com.coinomi.wallet.ui.TradeStatusActivity"
             android:label="@string/title_activity_exchange_status"
@@ -226,6 +214,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.coinomi.wallet.ui.SettingsActivity" />
+        </activity>
+
+        <activity
+            android:name="com.coinomi.wallet.ui.ContactUsActivity"
+            android:label="@string/action_support"
+            android:theme="@style/AppTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.coinomi.wallet.ui.WalletActivity" />
         </activity>
 
         <provider

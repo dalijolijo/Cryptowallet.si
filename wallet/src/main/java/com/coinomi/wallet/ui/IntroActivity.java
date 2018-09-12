@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import com.coinomi.core.coins.CoinType;
+import com.coinomi.wallet.Constants;
 import com.coinomi.wallet.R;
+
+import java.util.ArrayList;
 
 public class IntroActivity extends AbstractWalletFragmentActivity
         implements WelcomeFragment.Listener, PasswordConfirmationFragment.Listener,
-        SetPasswordFragment.Listener, SelectCoinsFragment.Listener {
+        SetPasswordFragment.Listener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,12 +114,17 @@ public class IntroActivity extends AbstractWalletFragmentActivity
     }
 
     private void selectCoins(Bundle args) {
-        String message = getResources().getString(R.string.select_coins);
-        replaceFragment(SelectCoinsFragment.newInstance(message, true, args));
+        Bundle arguments = args != null ? args : new Bundle();
+
+        ArrayList<String> ids = new ArrayList<>();
+        for (CoinType coinType : Constants.SUPPORTED_COINS) {
+            ids.add(coinType.getId());
+        }
+        arguments.putStringArrayList(Constants.ARG_MULTIPLE_COIN_IDS, ids);
+        onCoinSelection(arguments);
     }
 
-    @Override
-    public void onCoinSelection(Bundle args) {
+    private void onCoinSelection(Bundle args) {
         replaceFragment(FinalizeWalletRestorationFragment.newInstance(args));
     }
 }

@@ -212,9 +212,6 @@ public class NavigationDrawerFragment extends BaseFragment {
                 case ITEM_COIN:
                     listener.onAccountSelected((String) item.itemData);
                     break;
-                case ITEM_TRADE:
-                    listener.onTradeSelected();
-                    break;
                 case ITEM_OVERVIEW:
                     listener.onOverviewSelected();
                     break;
@@ -300,7 +297,6 @@ public class NavigationDrawerFragment extends BaseFragment {
      */
     public interface Listener {
         void onAccountSelected(String accountId);
-        void onTradeSelected();
         void onOverviewSelected();
     }
 }
