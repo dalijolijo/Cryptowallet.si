@@ -205,14 +205,6 @@
             android:layout_gravity="bottom"
             android:gravity="bottom">
 
-            <include
-                layout="@layout/powered_by_shapeshift"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/button_next"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
             <Button
                 android:id="@+id/button_next"
                 android:layout_width="wrap_content"

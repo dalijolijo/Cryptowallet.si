@@ -13,7 +13,6 @@ import com.coinomi.core.coins.CoinID;
 import com.coinomi.core.coins.CoinType;
 import com.coinomi.core.coins.Value;
 import com.coinomi.core.exceptions.AddressMalformedException;
-import com.coinomi.core.exchange.shapeshift.data.ShapeShiftTxStatus;
 import com.coinomi.core.wallet.AbstractAddress;
 
 import java.io.Serializable;
@@ -252,7 +251,6 @@ public class ExchangeHistoryProvider extends ContentProvider {
         public static final int STATUS_PROCESSING = 1;
         public static final int STATUS_COMPLETE = 2;
         public static final int STATUS_FAILED = -1;
-        public static final int STATUS_UNKNOWN = -2;
 
         public final int status;
         public final AbstractAddress depositAddress;
@@ -275,22 +273,6 @@ public class ExchangeHistoryProvider extends ContentProvider {
             this.withdrawTransactionId = withdrawTransactionId;
         }
 
-        public ExchangeEntry(AbstractAddress depositAddress, Value depositAmount, String depositTxId) {
-            this(STATUS_INITIAL, depositAddress, depositAmount, depositTxId, null, null, null);
-        }
-
-        public ExchangeEntry(ExchangeEntry initialEntry, ShapeShiftTxStatus txStatus) {
-            this.status = convertStatus(txStatus.status);
-            this.depositAddress = checkNotNull(txStatus.address == null ?
-                    initialEntry.depositAddress : txStatus.address);
-            this.depositAmount = checkNotNull(txStatus.incomingValue == null ?
-                    initialEntry.depositAmount : txStatus.incomingValue);
-            this.depositTransactionId = checkNotNull(initialEntry.depositTransactionId);
-            this.withdrawAddress = txStatus.withdraw;
-            this.withdrawAmount = txStatus.outgoingValue;
-            this.withdrawTransactionId = txStatus.transactionId;
-        }
-
         public ContentValues getContentValues() {
             ContentValues values = new ContentValues();
             values.put(KEY_STATUS, status);
@@ -303,46 +285,6 @@ public class ExchangeHistoryProvider extends ContentProvider {
             if (withdrawAmount != null) values.put(KEY_WITHDRAW_AMOUNT_UNIT, withdrawAmount.value);
             if (withdrawTransactionId != null) values.put(KEY_WITHDRAW_TXID, withdrawTransactionId);
             return values;
-        }
-
-        public ShapeShiftTxStatus getShapeShiftTxStatus() {
-            ShapeShiftTxStatus.Status shapeShiftStatus;
-            switch (status) {
-                case STATUS_INITIAL:
-                    shapeShiftStatus = ShapeShiftTxStatus.Status.NO_DEPOSITS;
-                    break;
-                case STATUS_PROCESSING:
-                    shapeShiftStatus = ShapeShiftTxStatus.Status.RECEIVED;
-                    break;
-                case STATUS_COMPLETE:
-                    shapeShiftStatus = ShapeShiftTxStatus.Status.COMPLETE;
-                    break;
-                case STATUS_FAILED:
-                    shapeShiftStatus = ShapeShiftTxStatus.Status.FAILED;
-                    break;
-                case STATUS_UNKNOWN:
-                default:
-                    shapeShiftStatus = ShapeShiftTxStatus.Status.UNKNOWN;
-            }
-
-            return new ShapeShiftTxStatus(shapeShiftStatus, depositAddress, withdrawAddress,
-                    depositAmount, withdrawAmount, withdrawTransactionId);
-        }
-
-        public static int convertStatus(ShapeShiftTxStatus.Status shapeShiftStatus) {
-            switch (shapeShiftStatus) {
-                case NO_DEPOSITS:
-                    return STATUS_INITIAL;
-                case RECEIVED:
-                    return STATUS_PROCESSING;
-                case COMPLETE:
-                    return STATUS_COMPLETE;
-                case FAILED:
-                    return STATUS_FAILED;
-                case UNKNOWN:
-                default:
-                    return STATUS_UNKNOWN;
-            }
         }
     }
 }

@@ -175,13 +175,6 @@
                     android:layout_alignParentRight="true"
                     android:text="@string/button_return" />
 
-                <include
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignBottom="@id/button_exit"
-                    layout="@layout/powered_by_shapeshift"/>
             </RelativeLayout>
 
         </LinearLayout>

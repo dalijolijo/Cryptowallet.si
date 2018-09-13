@@ -86,31 +86,8 @@ public class PayWithDialog extends DialogFragment {
 
         // Setup possible exchange accounts
         ViewGroup exchangeAccounts = (ViewGroup) view.findViewById(R.id.exchange_and_pay_layout);
-        boolean canExchange = false;
-        for (WalletAccount account : app.getAllAccounts()) {
-            if (!account.isType(type) && account.getBalance().isPositive()) {
-                addPayWithAccountRow(exchangeAccounts, account, uri);
-                canExchange = true;
-            }
-        }
-
-        if (canExchange) {
-            TextView poweredByShapeShift = (TextView) view.findViewById(R.id.powered_by_shapeshift);
-            poweredByShapeShift.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle(R.string.about_shapeshift_title)
-                            .setMessage(R.string.about_shapeshift_message)
-                            .setPositiveButton(R.string.button_ok, null)
-                            .create().show();
-                }
-            });
-        } else {
-            UiUtils.setGone(view.findViewById(R.id.exchange_and_pay_title));
-            UiUtils.setGone(exchangeAccounts);
-            UiUtils.setGone(view.findViewById(R.id.powered_by_shapeshift));
-        }
+        UiUtils.setGone(view.findViewById(R.id.exchange_and_pay_title));
+        UiUtils.setGone(exchangeAccounts);
 
         return new DialogBuilder(getActivity())
                 .setView(view)

@@ -4,6 +4,8 @@ import com.coinomi.core.coins.families.BitFamily;
 
 /**
  * @author John L. Jegutanis
+ *
+ * Still used in tests
  */
 public class BitcoinMain extends BitFamily {
     private BitcoinMain() {

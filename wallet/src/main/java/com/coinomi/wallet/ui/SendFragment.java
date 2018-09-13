@@ -8,7 +8,6 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -17,6 +16,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.view.ActionMode;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -39,8 +39,6 @@ import com.coinomi.core.coins.ValueType;
 import com.coinomi.core.coins.families.NxtFamily;
 import com.coinomi.core.exceptions.AddressMalformedException;
 import com.coinomi.core.exceptions.NoSuchPocketException;
-import com.coinomi.core.exchange.shapeshift.ShapeShift;
-import com.coinomi.core.exchange.shapeshift.data.ShapeShiftMarketInfo;
 import com.coinomi.core.messages.MessageFactory;
 import com.coinomi.core.messages.TxMessage;
 import com.coinomi.core.uri.CoinURI;
@@ -55,7 +53,6 @@ import com.coinomi.wallet.Constants;
 import com.coinomi.wallet.ExchangeRatesProvider;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
-import com.coinomi.wallet.tasks.MarketInfoPollTask;
 import com.coinomi.wallet.ui.widget.AddressView;
 import com.coinomi.wallet.ui.widget.AmountEditView;
 import com.coinomi.wallet.util.ThrottlingWalletChangeListener;
@@ -76,7 +73,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
 
 import javax.annotation.Nullable;
 
@@ -104,6 +100,10 @@ public class SendFragment extends WalletFragment {
 
     private enum State {
         INPUT, PREPARATION, SENDING, SENT, FAILED
+    }
+
+    private enum AddressState {
+        OK, NOT_SAME_TYPE, INCORRECT
     }
 
     // the fragment initialization parameters
@@ -142,7 +142,6 @@ public class SendFragment extends WalletFragment {
     private WalletApplication application;
     private Configuration config;
     private Map<String, ExchangeRate> localRates = new HashMap<>();
-    private ShapeShiftMarketInfo marketInfo;
 
     @BindView(R.id.send_to_address)         AutoCompleteTextView sendToAddressView;
     @BindView(R.id.send_to_address_static)  AddressView sendToStaticAddressView;
@@ -160,8 +159,6 @@ public class SendFragment extends WalletFragment {
     @BindView(R.id.send_confirm)            Button sendConfirmButton;
     @Nullable ReceivingAddressViewAdapter sendToAdapter;
     CurrencyCalculatorLink amountCalculatorLink;
-    Timer timer;
-    MyMarketInfoPollTask pollTask;
     ActionMode actionMode;
     EditViewListener txMessageViewTextChangeListener;
     Listener listener;
@@ -359,8 +356,6 @@ public class SendFragment extends WalletFragment {
 
         finishActionMode();
 
-        stopPolling();
-
         super.onPause();
     }
 
@@ -502,45 +497,6 @@ public class SendFragment extends WalletFragment {
         outState.putSerializable(STATE_AMOUNT_TYPE, sendAmountType);
     }
 
-    private void startOrStopMarketRatePolling() {
-        if (address != null && !account.isType(address)) {
-            String pair = ShapeShift.getPair(account.getCoinType(), address.getType());
-            if (timer == null) {
-                startPolling(pair);
-            } else {
-                pollTask.updatePair(pair);
-            }
-        } else if (timer != null) {
-            stopPolling();
-        }
-    }
-
-    /**
-     * Start polling for the market information of the current pair, if it is already stated this
-     * call does nothing
-     */
-    private void startPolling(String pair) {
-        if (timer == null) {
-            ShapeShift shapeShift = application.getShapeShift();
-            pollTask = new MyMarketInfoPollTask(handler, shapeShift, pair);
-            timer = new Timer();
-            timer.schedule(pollTask, 0, Constants.RATE_UPDATE_FREQ_MS);
-        }
-    }
-
-    /**
-     * Stop the polling for the market info, if it is already stop this call does nothing
-     */
-    private void stopPolling() {
-        if (timer != null) {
-            timer.cancel();
-            timer.purge();
-            pollTask.cancel();
-            timer = null;
-            pollTask = null;
-        }
-    }
-
     @OnClick(R.id.scan_qr_code)
     void handleScan() {
         startActivityForResult(new Intent(getActivity(), ScanActivity.class), REQUEST_CODE_SCAN);
@@ -623,9 +579,19 @@ public class SendFragment extends WalletFragment {
         if (requestCode == REQUEST_CODE_SCAN) {
             if (resultCode == Activity.RESULT_OK) {
                 String input = intent.getStringExtra(ScanActivity.INTENT_EXTRA_RESULT);
-                if (!processInput(input)) {
-                    String error = getResources().getString(R.string.scan_error, input);
-                    Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+                AddressState addressState = processInput(input);
+                switch (addressState) {
+                    case OK:
+                        // address is same type and is valid
+                        break;
+                    case NOT_SAME_TYPE:
+                        String error = getResources().getString(R.string.address_error);
+                        Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+                        break;
+                    case INCORRECT:
+                        String scanError = getResources().getString(R.string.scan_error, input);
+                        Toast.makeText(getActivity(), scanError, Toast.LENGTH_LONG).show();
+                        break;
                 }
             }
         } else if (requestCode == SIGN_TRANSACTION) {
@@ -657,18 +623,23 @@ public class SendFragment extends WalletFragment {
         }
     }
 
-    private boolean processInput(String input) {
+    private AddressState processInput(String input) {
         input = input.trim();
         try {
             updateStateFrom(new CoinURI(input));
-            return true;
+            return AddressState.OK;
         } catch (final CoinURIParseException x) {
-            try {
-                parseAddress(input);
-                updateView();
-                return true;
-            } catch (AddressMalformedException e) {
-                return false;
+            String error = x.getError();
+            if (!TextUtils.isEmpty(error) && Constants.ARG_ADDRESS_TYPE_ERROR.equals(error)) {
+                return AddressState.NOT_SAME_TYPE;
+            } else {
+                try {
+                    parseAddress(input);
+                    updateView();
+                    return AddressState.OK;
+                } catch (AddressMalformedException e) {
+                    return AddressState.INCORRECT;
+                }
             }
         }
     }
@@ -703,6 +674,9 @@ public class SendFragment extends WalletFragment {
         setAddress(coinUri.getAddress(), false);
         if (address == null) { // TODO when going to support the payment protocol, address could be null
             throw new CoinURIParseException("missing address");
+        } else if (!address.getType().equals(account.getCoinType())) {
+            address = null;
+            throw new CoinURIParseException(Constants.ARG_ADDRESS_TYPE_ERROR);
         }
 
         sendAmountType = address.getType();
@@ -735,8 +709,6 @@ public class SendFragment extends WalletFragment {
             amountCalculatorLink.setExchangeRate(getCurrentRate());
         }
 
-        startOrStopMarketRatePolling();
-
         // enable actions
         scanQrCodeButton.setEnabled(state == State.INPUT);
         eraseAddressButton.setEnabled(state == State.INPUT);
@@ -765,11 +737,6 @@ public class SendFragment extends WalletFragment {
     private boolean isAmountWithinLimits(Value amount) {
         boolean isWithinLimits = amount != null && amount.isPositive() && !amount.isDust();
 
-        // Check if within min & max deposit limits
-        if (isWithinLimits && marketInfo != null && canCompare(marketInfo.limit, amount)) {
-            isWithinLimits = amount.within(marketInfo.minimum, marketInfo.limit);
-        }
-
         // Check if we have the amount
         if (isWithinLimits && canCompare(lastBalance, amount)) {
             isWithinLimits = amount.compareTo(lastBalance) <= 0;
@@ -789,18 +756,8 @@ public class SendFragment extends WalletFragment {
      * Get the lowest deposit or withdraw for the provided amount type
      */
     private Value getLowestAmount(ValueType type) {
-        Value min = type.getMinNonDust();
-        if (marketInfo != null) {
-            if (marketInfo.minimum.isOfType(min)) {
-                min = Value.max(marketInfo.minimum, min);
-            } else if (marketInfo.rate.canConvert(type, marketInfo.minimum.type)) {
-                min = Value.max(marketInfo.rate.convert(marketInfo.minimum), min);
-            }
-        }
-        return min;
+        return type.getMinNonDust();
     }
-
-
 
     private boolean everythingValid() {
         return state == State.INPUT && isOutputsValid() && isAmountValid() &&
@@ -877,12 +834,6 @@ public class SendFragment extends WalletFragment {
                             message = getString(R.string.amount_error_not_enough_money,
                                     lastBalance.toFriendlyString());
                         }
-
-                        if (marketInfo != null && canCompare(marketInfo.limit, amountParsed) &&
-                                amountParsed.compareTo(marketInfo.limit) > 0) {
-                            message = getString(R.string.trade_error_max_limit,
-                                    marketInfo.limit.toFriendlyString());
-                        }
                     }
                     amountError.setText(message);
                 } else { // Should not happen, but show a generic error
@@ -923,14 +874,14 @@ public class SendFragment extends WalletFragment {
                 if (!input.isEmpty()) {
                     if (account.getCoinType() instanceof NxtFamily) {
                         //TODO validate NXT address
-                        if (processInput(input)) return;
+                        if (processInput(input) == AddressState.OK) return;
                         parseAddress(GenericUtils.fixAddress(input));
                         updateView();
                         addressError.setVisibility(View.GONE);
                         return;
                     }
                     // Process fast the input string
-                    if (processInput(input)) return;
+                    if (processInput(input) == AddressState.OK) return;
 
                     // Try to fix address if needed
                     parseAddress(GenericUtils.fixAddress(input));
@@ -1179,16 +1130,6 @@ public class SendFragment extends WalletFragment {
         }
     }
 
-    /**
-     * Updates the exchange rate and limits for the specific market.
-     * Note: if the current pair is different that the marketInfo pair, do nothing
-     */
-    private void onMarketUpdate(ShapeShiftMarketInfo marketInfo) {
-        if (address != null && marketInfo.isPair(account.getCoinType(), address.getType())) {
-            this.marketInfo = marketInfo;
-        }
-    }
-
     @Nullable
     private ExchangeRate getCurrentRate() {
         return localRates.get(sendAmountType.getSymbol());
@@ -1213,9 +1154,6 @@ public class SendFragment extends WalletFragment {
                     break;
                 case UPDATE_WALLET_CHANGE:
                     ref.onWalletUpdate();
-                    break;
-                case UPDATE_MARKET:
-                    ref.onMarketUpdate((ShapeShiftMarketInfo) msg.obj);
                     break;
                 case SET_ADDRESS:
                     ref.onAddressSelected((AbstractAddress) msg.obj);
@@ -1296,20 +1234,6 @@ public class SendFragment extends WalletFragment {
                 args.putString("constraint", constraint.toString());
             getLoaderManager().restartLoader(ID_RECEIVING_ADDRESS_LOADER, args, receivingAddressLoaderCallbacks);
             return getCursor();
-        }
-    }
-
-    private static class MyMarketInfoPollTask extends MarketInfoPollTask {
-        private final Handler handler;
-
-        MyMarketInfoPollTask(Handler handler, ShapeShift shapeShift, String pair) {
-            super(shapeShift, pair);
-            this.handler = handler;
-        }
-
-        @Override
-        public void onHandleMarketInfo(ShapeShiftMarketInfo marketInfo) {
-            handler.sendMessage(handler.obtainMessage(UPDATE_MARKET, marketInfo));
         }
     }
 

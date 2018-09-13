@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.coinomi.core.coins.CoinType;
 import com.coinomi.core.coins.Value;
-import com.coinomi.core.exchange.shapeshift.ShapeShift;
 import com.coinomi.core.util.HardwareSoftwareCompliance;
 import com.coinomi.core.wallet.AbstractAddress;
 import com.coinomi.core.wallet.Wallet;
@@ -75,7 +74,6 @@ public class WalletApplication extends Application {
 
     private long lastStop;
     private ConnectivityManager connManager;
-    private ShapeShift shapeShift;
     private File txCachePath;
 
     @Override
@@ -151,18 +149,6 @@ public class WalletApplication extends Application {
                 }
             }
         }
-    }
-
-    public boolean isConnected() {
-        NetworkInfo activeInfo = connManager.getActiveNetworkInfo();
-        return activeInfo != null && activeInfo.isConnected();
-    }
-
-    public ShapeShift getShapeShift() {
-        if (shapeShift == null) {
-            shapeShift = new ShapeShift(NetworkUtils.getHttpClient(getApplicationContext()));
-        }
-        return shapeShift;
     }
 
     public File getTxCachePath() {

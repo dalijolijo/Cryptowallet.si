@@ -1,7 +1,6 @@
 package com.coinomi.wallet.ui;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,9 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
@@ -30,9 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coinomi.core.coins.CoinType;
-import com.coinomi.core.exchange.shapeshift.ShapeShift;
-import com.coinomi.core.exchange.shapeshift.data.ShapeShiftException;
-import com.coinomi.core.exchange.shapeshift.data.ShapeShiftTxStatus;
 import com.coinomi.core.wallet.AbstractAddress;
 import com.coinomi.core.wallet.WalletAccount;
 import com.coinomi.wallet.Constants;
@@ -44,13 +37,8 @@ import com.coinomi.wallet.ui.common.BaseFragment;
 import com.coinomi.wallet.util.Fonts;
 import com.coinomi.wallet.util.WeakHandler;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.coinomi.core.Preconditions.checkNotNull;
 import static com.coinomi.wallet.util.UiUtils.setGone;
@@ -61,15 +49,11 @@ import static com.coinomi.wallet.util.UiUtils.setVisible;
  * @author John L. Jegutanis
  */
 public class TradeStatusFragment extends BaseFragment {
-    private static final Logger log = LoggerFactory.getLogger(TradeStatusFragment.class);
 
-    private static final int UPDATE_SHAPESHIFT_STATUS = 0;
     private static final int UPDATE_STATUS = 1;
     private static final int ERROR_MESSAGE = 2;
 
     private static final int ID_STATUS_LOADER = 0;
-
-    private static final long POLLING_MS = 3000;
 
     private static final String ARG_SHOW_EXIT_BUTTON = "show_exit_button";
 
@@ -92,41 +76,9 @@ public class TradeStatusFragment extends BaseFragment {
 
     private Uri statusUri;
     private ExchangeEntry exchangeStatus;
-    private StatusPollTask pollTask;
     private final Handler handler = new MyHandler(this);
     private Timer timer;
     private WalletApplication application;
-
-
-    private static class StatusPollTask extends TimerTask {
-        private final ShapeShift shapeShift;
-        private final AbstractAddress depositAddress;
-        private final Handler handler;
-
-        private StatusPollTask(ShapeShift shapeShift, AbstractAddress depositAddress, Handler handler) {
-            this.shapeShift = shapeShift;
-            this.depositAddress = depositAddress;
-            this.handler = handler;
-        }
-
-        @Override
-        public void run() {
-            for (int tries = 3; tries > 0; tries--) {
-                try {
-                    log.info("Polling status for deposit: {}", depositAddress);
-                    ShapeShiftTxStatus newStatus = shapeShift.getTxStatus(depositAddress);
-                    handler.sendMessage(handler.obtainMessage(UPDATE_SHAPESHIFT_STATUS, newStatus));
-                    break;
-                } catch (ShapeShiftException e) {
-                    log.warn("Error occurred while polling", e);
-                    handler.sendMessage(handler.obtainMessage(ERROR_MESSAGE, e.getMessage()));
-                    break;
-                } catch (IOException e) {
-                    /* ignore and retry */
-                }
-            }
-        }
-    }
 
     private static class MyHandler extends WeakHandler<TradeStatusFragment> {
         public MyHandler(TradeStatusFragment ref) { super(ref); }
@@ -134,9 +86,6 @@ public class TradeStatusFragment extends BaseFragment {
         @Override
         protected void weakHandleMessage(TradeStatusFragment ref, Message msg) {
             switch (msg.what) {
-                case UPDATE_SHAPESHIFT_STATUS:
-                    ref.updateShapeShiftStatus((ShapeShiftTxStatus) msg.obj);
-                    break;
                 case UPDATE_STATUS:
                     ref.updateStatus((ExchangeEntry) msg.obj);
                     break;
@@ -144,7 +93,6 @@ public class TradeStatusFragment extends BaseFragment {
                     ref.errorIcon.setVisibility(View.VISIBLE);
                     ref.errorText.setVisibility(View.VISIBLE);
                     ref.errorText.setText(ref.getString(R.string.trade_status_failed_detail, msg.obj));
-                    ref.stopPolling();
                     break;
             }
         }
@@ -153,14 +101,6 @@ public class TradeStatusFragment extends BaseFragment {
     private void updateStatus(ExchangeEntry newStatus) {
         exchangeStatus = checkNotNull(newStatus);
         updateView();
-    }
-
-    private void updateShapeShiftStatus(ShapeShiftTxStatus shapeShiftTxStatus) {
-        ExchangeEntry newStatus = new ExchangeEntry(exchangeStatus, shapeShiftTxStatus);
-        // If updated status, save it
-        if (exchangeStatus.status != newStatus.status) {
-            contentResolver.update(statusUri, newStatus.getContentValues(), null, null);
-        }
     }
 
     public static TradeStatusFragment newInstance(ExchangeEntry exchangeEntry) {
@@ -202,21 +142,21 @@ public class TradeStatusFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trade_status, container, false);
 
-        exchangeInfo = (TextView) view.findViewById(R.id.exchange_status_info);
-        depositIcon = (TextView) view.findViewById(R.id.trade_deposit_status_icon);
-        depositProgress = (ProgressBar) view.findViewById(R.id.trade_deposit_status_progress);
-        depositText = (TextView) view.findViewById(R.id.trade_deposit_status_text);
-        exchangeIcon = (TextView) view.findViewById(R.id.trade_exchange_status_icon);
-        exchangeProgress = (ProgressBar) view.findViewById(R.id.trade_exchange_status_progress);
-        exchangeText = (TextView) view.findViewById(R.id.trade_exchange_status_text);
-        errorIcon = (TextView) view.findViewById(R.id.trade_error_status_icon);
-        errorText = (TextView) view.findViewById(R.id.trade_error_status_text);
+        exchangeInfo = view.findViewById(R.id.exchange_status_info);
+        depositIcon = view.findViewById(R.id.trade_deposit_status_icon);
+        depositProgress = view.findViewById(R.id.trade_deposit_status_progress);
+        depositText = view.findViewById(R.id.trade_deposit_status_text);
+        exchangeIcon = view.findViewById(R.id.trade_exchange_status_icon);
+        exchangeProgress = view.findViewById(R.id.trade_exchange_status_progress);
+        exchangeText = view.findViewById(R.id.trade_exchange_status_text);
+        errorIcon = view.findViewById(R.id.trade_error_status_icon);
+        errorText = view.findViewById(R.id.trade_error_status_text);
         Fonts.setTypeface(depositIcon, Fonts.Font.COINOMI_FONT_ICONS);
         Fonts.setTypeface(exchangeIcon, Fonts.Font.COINOMI_FONT_ICONS);
         Fonts.setTypeface(errorIcon, Fonts.Font.COINOMI_FONT_ICONS);
 
-        viewTransaction = (Button) view.findViewById(R.id.trade_view_transaction);
-        emailReceipt = (Button) view.findViewById(R.id.trade_email_receipt);
+        viewTransaction = view.findViewById(R.id.trade_view_transaction);
+        emailReceipt = view.findViewById(R.id.trade_email_receipt);
 
         if (showExitButton) {
             view.findViewById(R.id.button_exit).setOnClickListener(new View.OnClickListener() {
@@ -231,53 +171,10 @@ public class TradeStatusFragment extends BaseFragment {
 
         updateView();
 
-        view.findViewById(R.id.powered_by_shapeshift).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.about_shapeshift_title)
-                        .setMessage(R.string.about_shapeshift_message)
-                        .setPositiveButton(R.string.button_ok, null)
-                        .create().show();
-            }
-        });
-
         return view;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        stopPolling();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        startPolling();
-    }
-
-    private void startPolling() {
-        if (timer == null && exchangeStatus.status != ExchangeEntry.STATUS_COMPLETE) {
-            ShapeShift shapeShift = application.getShapeShift();
-            pollTask = new StatusPollTask(shapeShift, exchangeStatus.depositAddress, handler);
-            timer = new Timer();
-            timer.schedule(pollTask, 0, POLLING_MS);
-        }
-    }
-
-    private void stopPolling() {
-        if (timer != null) {
-            timer.cancel();
-            timer.purge();
-            timer = null;
-            pollTask.cancel();
-            pollTask = null;
-        }
-    }
-
     public void onExitPressed() {
-        stopPolling();
         if (listener != null) {
             listener.onFinish();
         }
@@ -363,14 +260,12 @@ public class TradeStatusFragment extends BaseFragment {
                 setGone(errorText);
                 updateViewTransaction();
                 updateEmailReceipt();
-                stopPolling();
                 break;
             case ExchangeEntry.STATUS_FAILED:
                 if (actionDeleteMenu != null) actionDeleteMenu.setVisible(true);
                 setVisible(errorIcon);
                 setVisible(errorText);
                 errorText.setText(R.string.trade_status_failed);
-                stopPolling();
         }
     }
 
