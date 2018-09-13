@@ -97,6 +97,7 @@ import static com.coinomi.wallet.util.UiUtils.setVisible;
  */
 public class SendFragment extends WalletFragment {
     private static final Logger log = LoggerFactory.getLogger(SendFragment.class);
+    private TextView tvBalance;
 
     private enum State {
         INPUT, PREPARATION, SENDING, SENT, FAILED
@@ -292,6 +293,10 @@ public class SendFragment extends WalletFragment {
     private void updateBalance() {
         if (account != null) {
             lastBalance = account.getBalance();
+            if (tvBalance != null && lastBalance != null) {
+                account.getWallet().getBalances();
+                tvBalance.setText(getString(R.string.send_amount_balance, lastBalance.toFriendlyString()));
+            }
         }
     }
 
@@ -317,6 +322,8 @@ public class SendFragment extends WalletFragment {
         addressError.setVisibility(View.GONE);
         amountError.setVisibility(View.GONE);
         amountWarning.setVisibility(View.GONE);
+
+        tvBalance = view.findViewById(R.id.tv_balance);
 
         setupTxMessage();
 

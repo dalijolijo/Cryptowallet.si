@@ -8,7 +8,7 @@ android {
         applicationId "com.cryptowallet.si"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 56
+        versionCode 1
         versionName "v1.0"
     }
 
