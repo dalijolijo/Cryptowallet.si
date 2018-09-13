@@ -1,68 +1,17 @@
-Cryptowallet
-===============
+### Welcome to CryptoWallet.si. 
 
-Our goal is to support cryptocurrency with an active development team. Store cryptocurrency through a single app, without sacrificing security. Private keys are stored on your own device. Instead of having one backup file for every coin, you get a master key that can be memorized or stored on a piece of paper. Restore all wallets from a single recovery phrase.
+### Latest .apk release is here https://github.com/CryptowalletSi/Cryptowallet.si/releases/. 
 
-TODOs:
+### Soon on Google Play store. 
 
-* Create instrumentation tests to test a signed APK
+- Before sending any funds to your mobile wallet please make shure you have written the backup seed words and choosen a strong password to secure your wallet. 
+- If you loose/forget your wallet password or your mobile get stolen/broken/hacked/damaged and you dont have your recovery seed we cant help you. 
+- Your wallet is your responsibility. 
+- We provide 2-4 backedn electrum servrs required for wallet to coomunita with the blockchains in best efford. 
+- Backend servers dont store your coins and only provide the connection the to blockchain network for wallet balance info and transmittion of your transactions once it is  signed with your private key on your own device. 
+- We dont have access to your coins, your seed backup or your public keys. 
+- Private keys can be retrieved from the backup seed (again write it down andstore it to a safe place). 
 
+### For support join our Telegram group: https://t.me/joinchat/D32pHEojbV2orJhc0wBp8A
 
-## Building the app
-
-Install [Android Studio](https://developer.android.com/sdk/installing/studio.html). Once it is
-running, import Cryptowallet.si by navigating to where you cloned or downloaded it and selecting
-settings.gradle. When it is finished importing, click on the SDK Manager ![SDK Manager](https://developer.android.com/images/tools/sdk-manager-studio.png). You will need to install SDK version 21.
-
-<br/>
-Make sure that you have JDK 7 installed before building. You can get it [Here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html). Once you have that installed, navigate to File > Project Structure > SDK Location and change the path of your current JDK to the path of the new JDK. **The project will not build with JDK 8**. 
-
-<br/>
-Once it is finished installing, you will need to enable developer options on your phone. To do so,
-go into settings, About Phone, locate your Build Number, and tap it 7 times, or until it says
-"You are now a Developer". Then, go back to the main Settings screen and scroll once again to the
-bottom. Select Developer options and enable USB Debugging.
-
-<br/>
-Then plug your phone into your computer and hit the large green play button at the top of
-Android Studio. It will load for a moment before prompting you to select which device to install
-it on. Select your device from the list, and hit continue.
-
-**NOTE**
-If you are attempting to build on a Lollipop emulator, please ensure that you are using *Android 5.*.* armeabi-v7*. It will not build on an x86/x86_64 emulator.
-
-
-
-## Releasing the app
-
-To release the app follow the steps.
-
-1) Change the following:
-
-* in strings.xml app_name string to "Coinomi" and app_package to com.coinomi.wallet
-* in build.gradle the package from "com.coinomi.wallet.dev" to "com.coinomi.wallet"
-* in AndroidManifest.xml the android:icon to "ic_launcher" and all "com.coinomi.wallet.dev.*"  to "com.coinomi.wallet.*"
-* remove all ic_launcher_dev icons with `rm wallet/src/main/res/drawable*/ic_launcher_dev.png`
-* setup ACRA and ShapeShift
-
-2) Then in the Android Studio go to:
-
-* Build -> Clean Project and without waiting...
-* Build -> Generate Signed APK and generate a signed APK. ... and now you can grab yourself a nice cup of tea.
-
-3) Test this APK (TODO: with instrumentation tests).
-
-For now test it manually by installing it `adb install -r wallet/wallet-release.apk`
-
-> This one is in the TODOs and must be automated
-> because it will be here that you take a break ;)
-
-4) Upload to Play Store and check for any errors and if all OK publish in beta first.
-
-5) Create a GIT release commit:
-
-* Create a commit with the log entry similar to the description in the Play Store
-* Create a tag with the version of the released APK with `git tag vX.Y.Z <commit-hash>`
-
-
-
+### Responsibility of the security of your mobile device is yours alone.
