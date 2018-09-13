@@ -15,3 +15,5 @@
 ### For support join our Telegram group: https://t.me/joinchat/D32pHEojbV2orJhc0wBp8A
 
 ### Responsibility of the security of your mobile device is yours alone.
+
+### Privacy policy: https://cryptowallet.si/privacy.html
