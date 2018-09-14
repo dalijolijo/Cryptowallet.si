@@ -16,4 +16,12 @@
 
 ### Responsibility of the security of your mobile device is yours alone.
 
+### Github repositories of the integrated cryptocurrencies:
+
+- https://github.com/LanaCoin/lanacoin
+- https://github.com/Taj-Coin/tajcoin
+- https://github.com/Nevacoin/nevacoin
+- https://github.com/AquariusNetwork/ARCO
+- https://github.com/NetkoCoin/netko
+
 ### Privacy policy: https://cryptowallet.si/privacy.html
