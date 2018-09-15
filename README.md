@@ -1,5 +1,7 @@
 ### Welcome to CryptoWallet.si. 
 
+### Alternative .apk download link http://pc.cd/4GV7
+
 ### Latest .apk release is here https://github.com/CryptowalletSi/Cryptowallet.si/releases/. 
 
 ### Soon on Google Play store. 
