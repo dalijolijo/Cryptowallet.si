@@ -1,6 +1,6 @@
 ### Welcome to CryptoWallet.si. 
 
-### Latest .apk release is here https://github.com/CryptowalletSi/Cryptowallet.si/releases/. 
+### Latest .apk release is here https://github.com/CryptowalletSi/Cryptowallet.si/releases
 
 ### CryptoWallet.si in Google play https://play.google.com/store/apps/details?id=com.cryptowallet.si
 
