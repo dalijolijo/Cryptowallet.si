@@ -1,8 +1,8 @@
 ### Welcome to CryptoWallet.si. 
 
-### Latest .apk release is here https://github.com/CryptowalletSi/Cryptowallet.si/releases/. 
+### Latest .apk release is here (https://github.com/CryptowalletSi/Cryptowallet.si/releases/). 
 
-### CryptoWallet.si in Google play: https://play.google.com/store/apps/details?id=com.cryptowallet.si
+### CryptoWallet.si in Google play: (https://play.google.com/store/apps/details?id=com.cryptowallet.si)
 
 - Before sending any funds to your mobile wallet please make shure you have written the backup seed words and choosen a strong password to secure your wallet. 
 - If you loose/forget your wallet password or your mobile device get stolen/broken/hacked/damaged and you dont have your recovery seed we cant help you. 
@@ -12,7 +12,7 @@
 - We dont have access to your coins, your seed backup or your private keys. 
 - Private keys can be retrieved from the backup seed (again write it down andstore it to a safe place). 
 
-### For support join our Telegram group: https://t.me/joinchat/D32pHEojbV2orJhc0wBp8A
+### For support join our Telegram group: (https://t.me/joinchat/D32pHEojbV2orJhc0wBp8A)
 
 ### Responsibility of the security of your mobile device is yours alone.
 
