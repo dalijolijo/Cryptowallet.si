@@ -86,6 +86,7 @@ public class Constants {
     public static final String BINARY_URL = "https://github.com/CryptowalletSi/Cryptowallet.si/releases";
 
     public static final String VERSION_URL = "https://cryptowallet.si/version";
+    public static final String PARTNERS_URI = "https://cryptowallet.si/partner.json";
     public static final String SUPPORT_EMAIL = "support@cryptowallet.si";
 
     // TODO move to resource files

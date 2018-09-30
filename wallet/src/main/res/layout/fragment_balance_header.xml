@@ -4,20 +4,20 @@
     xmlns:coinomi="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/amount_margin_top"
         android:paddingEnd="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/amount_margin_top"
-        android:paddingBottom="@dimen/amount_margin_bottom"
-        android:layout_gravity="center_horizontal">
+        android:paddingBottom="@dimen/amount_margin_bottom">
 
         <com.coinomi.wallet.ui.widget.Amount
             android:id="@+id/account_exchanged_balance"
@@ -29,27 +29,27 @@
             android:id="@+id/account_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            coinomi:show_big="true"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            coinomi:show_big="true" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:layout_gravity="center_horizontal">
+        android:paddingRight="@dimen/activity_horizontal_margin">
 
         <TextView
             android:id="@+id/connection_label"
+            style="@style/ErrorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/ErrorText"
-            android:layout_marginBottom="@dimen/amount_margin_bottom"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/amount_margin_bottom"
             android:text="@string/disconnected_label" />
 
         <TextView
@@ -63,4 +63,39 @@
             android:textColor="@color/gray_26_hint_text"
             android:textSize="@dimen/history_empty" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:id="@+id/iv_first_partner"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"
+            coinomi:layout_constraintDimensionRatio="4:1"
+            coinomi:layout_constraintEnd_toEndOf="parent"
+            coinomi:layout_constraintStart_toStartOf="parent"
+            coinomi:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_second_partner"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:scaleType="fitXY"
+            coinomi:layout_constraintDimensionRatio="4:1"
+            coinomi:layout_constraintEnd_toEndOf="parent"
+            coinomi:layout_constraintStart_toStartOf="parent"
+            coinomi:layout_constraintTop_toBottomOf="@id/iv_first_partner" />
+    </android.support.constraint.ConstraintLayout>
 </LinearLayout>
