@@ -1,13 +1,11 @@
 package com.coinomi.wallet.ui;
 
-import android.support.v4.app.Fragment;
-
 import com.coinomi.core.wallet.WalletAccount;
-import com.coinomi.wallet.ui.common.BaseFragment;
+import com.coinomi.wallet.ui.common.BasePartnersDataFragment;
 
 /**
  * @author John L. Jegutanis
  */
-public abstract class WalletFragment extends BaseFragment implements ViewUpdateble {
+public abstract class WalletFragment extends BasePartnersDataFragment implements ViewUpdateble {
     abstract public WalletAccount getAccount();
 }

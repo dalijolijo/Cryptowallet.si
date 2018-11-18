@@ -5,23 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.coinomi.core.coins.CoinType;
 import com.coinomi.core.coins.Value;
 import com.coinomi.core.util.GenericUtils;
@@ -36,9 +32,6 @@ import com.coinomi.wallet.ExchangeRatesProvider;
 import com.coinomi.wallet.ExchangeRatesProvider.ExchangeRate;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
-import com.coinomi.wallet.tasks.GetPartnersDataTask;
-import com.coinomi.wallet.tasks.HttpRequestsFactory;
-import com.coinomi.wallet.tasks.TasksLoader;
 import com.coinomi.wallet.ui.widget.Amount;
 import com.coinomi.wallet.ui.widget.SwipeRefreshLayout;
 import com.coinomi.wallet.util.ThrottlingWalletChangeListener;
@@ -51,7 +44,6 @@ import org.bitcoinj.utils.Threading;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URI;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -103,14 +95,9 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
     @BindView(R.id.account_exchanged_balance) Amount accountExchangedBalance;
     @BindView(R.id.connection_label) TextView connectionLabel;
 
-    @BindView(R.id.iv_first_partner) ImageView firstPartnerIv;
-    @BindView(R.id.iv_second_partner) ImageView secondPartnerIv;
-
     private TransactionsListAdapter adapter;
     private Listener listener;
     private ContentResolver resolver;
-
-    private HttpRequestsFactory.Response<List<GetPartnersDataTask.PartnerData>> partnerResponse;
 
     /**
      * Use this factory method to create a new instance of
@@ -148,7 +135,6 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
             return;
         }
         type = pocket.getCoinType();
-        loadPartnersData();
     }
 
     @Override
@@ -214,12 +200,6 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
         // Initialize header
         View header = inflater.inflate(R.layout.fragment_balance_header, null);
         list.addHeaderView(header, null, true);
-
-        // Set a space in the end of the list
-        View listFooter = new View(inflater.getContext());
-        listFooter.setMinimumHeight(
-                getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin));
-        list.addFooterView(listFooter);
     }
 
     private void setupConnectivityStatus() {
@@ -381,12 +361,22 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
 
     @Override
     public void onLoadFinished(Loader<List<AbstractTransaction>> loader, final List<AbstractTransaction> transactions) {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (adapter != null) adapter.replace(transactions);
+        handler.post(() -> {
+            int prevCount = 0;
+            if (adapter != null) {
+                prevCount = adapter.getCount();
+                adapter.replace(transactions);
+            }
+
+            if (adapter != null && prevCount != adapter.getCount()) {
+                loadPartnersData();
             }
         });
+    }
+
+    @Override
+    protected boolean showBothImages() {
+        return adapter.getCount() == 0;
     }
 
     @Override
@@ -529,47 +519,13 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
         if (adapter != null) adapter.clearLabelCache();
     }
 
+    @Override
+    protected boolean isLoadPartnersDataEnabled() {
+        return true;
+    }
+
     private void clearLabelCache() {
         if (adapter != null) adapter.clearLabelCache();
-    }
-
-    private void loadPartnersData() {
-        partnerResponse = data -> {
-            if (data != null && !data.isEmpty()) {
-                try {
-                    GetPartnersDataTask.PartnerData data1 = data.get(0);
-                    GetPartnersDataTask.PartnerData data2 = data.get(1);
-                    loadImages(data1, data2);
-                } catch (Throwable ignored) {
-                    Log.e("PARTNER", "Error loading images: ", ignored);
-                }
-            }
-        };
-        TasksLoader.INSTANCE.loadPartnersData(partnerResponse);
-    }
-
-    private void loadImages(GetPartnersDataTask.PartnerData data1, GetPartnersDataTask.PartnerData data2) {
-        Glide.with(this)
-                .load(data1.imageUrl)
-                .into(firstPartnerIv);
-        Glide.with(this)
-                .load(data2.imageUrl)
-                .into(secondPartnerIv);
-
-        firstPartnerIv.setOnClickListener(v -> openPartnerLink(data1.link));
-        secondPartnerIv.setOnClickListener(v -> openPartnerLink(data2.link));
-    }
-
-    private void openPartnerLink(String link) {
-        Uri uri = Uri.parse(link); // missing 'http://' will cause crashed
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        partnerResponse = null;
     }
 
     private static class MyHandler extends WeakHandler<BalanceFragment> {

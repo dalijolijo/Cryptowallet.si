@@ -8,10 +8,6 @@ public enum TasksLoader {
     private GenericTask<List<GetPartnersDataTask.PartnerData>> partnersTask;
 
     public void loadPartnersData(HttpRequestsFactory.Response<List<GetPartnersDataTask.PartnerData>> responseListener) {
-        if (partnersTask != null && !partnersTask.isCancelled()) {
-            partnersTask.cancel(true);
-            partnersTask = null;
-        }
         partnersTask = new GetPartnersDataTask(responseListener);
         partnersTask.execute(0);
     }

@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
@@ -27,6 +28,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FilterQueryProvider;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -158,6 +160,8 @@ public class SendFragment extends WalletFragment {
     @BindView(R.id.tx_message)              EditText txMessageView;
     @BindView(R.id.tx_message_counter)      TextView txMessageCounter;
     @BindView(R.id.send_confirm)            Button sendConfirmButton;
+    @BindView(R.id.partners_images_container)
+    FrameLayout partnersContainer;
     @Nullable ReceivingAddressViewAdapter sendToAdapter;
     CurrencyCalculatorLink amountCalculatorLink;
     ActionMode actionMode;
@@ -328,6 +332,17 @@ public class SendFragment extends WalletFragment {
         setupTxMessage();
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @android.support.annotation.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        partnersContainer.setVisibility(isLoadPartnersDataEnabled() ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    protected boolean isLoadPartnersDataEnabled() {
+        return messageFactory == null;
     }
 
     @Override

@@ -18,8 +18,6 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin">
 
             <TextView
@@ -27,14 +25,22 @@
                 style="@style/SecondaryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:layout_gravity="end"
                 tools:text="BALANCE: 12.22e"/>
+
+            <Space
+                android:id="@+id/space_container"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/activity_horizontal_margin" />
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:gravity="center_vertical">
 
 
@@ -212,10 +218,11 @@
                 </RelativeLayout>
             </LinearLayout>
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:gravity="bottom">
                 <Button
                     android:id="@+id/send_confirm"
@@ -226,6 +233,14 @@
                     android:enabled="false"
                     android:text="@string/button_send" />
             </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/partners_images_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <include layout="@layout/partners_images_container" />
+            </FrameLayout>
 
         </LinearLayout>
     </ScrollView>

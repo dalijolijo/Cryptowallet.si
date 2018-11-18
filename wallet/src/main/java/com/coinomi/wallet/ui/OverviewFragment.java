@@ -2,45 +2,36 @@ package com.coinomi.wallet.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 import android.support.v7.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.coinomi.core.coins.Value;
-import com.coinomi.core.util.GenericUtils;
 import com.coinomi.core.wallet.Wallet;
 import com.coinomi.core.wallet.WalletAccount;
 import com.coinomi.wallet.Configuration;
-import com.coinomi.wallet.ExchangeRatesProvider;
-import com.coinomi.wallet.ExchangeRatesProvider.ExchangeRate;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.WalletApplication;
 import com.coinomi.wallet.ui.adaptors.AccountListAdapter;
 import com.coinomi.wallet.ui.common.BaseFragment;
+import com.coinomi.wallet.ui.common.BasePartnersDataFragment;
 import com.coinomi.wallet.ui.widget.Amount;
 import com.coinomi.wallet.ui.widget.SwipeRefreshLayout;
 import com.coinomi.wallet.util.ThrottlingWalletChangeListener;
 import com.coinomi.wallet.util.UiUtils;
 import com.coinomi.wallet.util.WeakHandler;
-import com.google.common.collect.ImmutableMap;
 
 import org.bitcoinj.utils.Threading;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,14 +43,11 @@ import butterknife.OnItemLongClick;
  * @author vbcs
  * @author John L. Jegutanis
  */
-public class OverviewFragment extends BaseFragment {
+public class OverviewFragment extends BasePartnersDataFragment {
     private static final Logger log = LoggerFactory.getLogger(OverviewFragment.class);
 
     private static final int WALLET_CHANGED = 0;
     private static final int UPDATE_VIEW = 1;
-    private static final int SET_EXCHANGE_RATES = 2;
-
-    private static final int ID_RATE_LOADER = 0;
 
     private final Handler handler = new MyHandler(this);
 
@@ -73,9 +61,6 @@ public class OverviewFragment extends BaseFragment {
                 case WALLET_CHANGED:
                     ref.updateWallet();
                     break;
-                case SET_EXCHANGE_RATES:
-                    ref.setExchangeRates((Map<String, ExchangeRate>) msg.obj);
-                    break;
                 case UPDATE_VIEW:
                     ref.updateView();
                     break;
@@ -84,19 +69,14 @@ public class OverviewFragment extends BaseFragment {
     }
 
     private Wallet wallet;
-    private Value currentBalance;
 
-    private boolean isFullAmount = false;
     private WalletApplication application;
-    private Configuration config;
 
     private AccountListAdapter adapter;
-    Map<String, ExchangeRate> exchangeRates;
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     @BindView(R.id.swipeContainer) SwipeRefreshLayout swipeContainer;
     @BindView(R.id.account_rows) ListView accountRows;
-    @BindView(R.id.account_balance) Amount mainAmount;
 
     private Listener listener;
 
@@ -119,9 +99,6 @@ public class OverviewFragment extends BaseFragment {
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        exchangeRates = ExchangeRatesProvider.getRates(
-                application.getApplicationContext(), config.getExchangeCurrencyCode());
-        if (adapter != null) adapter.setExchangeRates(exchangeRates);
     }
 
     @Override
@@ -129,9 +106,17 @@ public class OverviewFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_overview, container, false);
-        View header = inflater.inflate(R.layout.fragment_overview_header, null);
         accountRows = ButterKnife.findById(view, R.id.account_rows);
-        accountRows.addHeaderView(header, null, false);
+
+        View spaceView = new View(getContext());
+        int height = getResources().getDimensionPixelSize(R.dimen.row_padding_horizontal) * 2;
+        spaceView.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
+
+        accountRows.addHeaderView(spaceView, null, false);
+
+        View partnersDataView = inflater.inflate(R.layout.partners_images_container, null);
+        accountRows.addFooterView(partnersDataView);
+
         setBinder(ButterKnife.bind(this, view));
 
         if (wallet == null) {
@@ -139,12 +124,9 @@ public class OverviewFragment extends BaseFragment {
         }
 
         // Setup refresh listener which triggers new data loading
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (listener != null) {
-                    listener.onRefresh();
-                }
+        swipeContainer.setOnRefreshListener(() -> {
+            if (listener != null) {
+                listener.onRefresh();
             }
         });
         // Configure the refreshing colors
@@ -162,7 +144,6 @@ public class OverviewFragment extends BaseFragment {
         // Init list adapter
         adapter = new AccountListAdapter(inflater.getContext(), wallet);
         accountRows.setAdapter(adapter);
-        adapter.setExchangeRates(exchangeRates);
 
         return view;
     }
@@ -191,18 +172,10 @@ public class OverviewFragment extends BaseFragment {
             throw new ClassCastException(context.toString() + " must implement " + Listener.class);
         }
         application = (WalletApplication) context.getApplicationContext();
-        config = application.getConfiguration();
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getLoaderManager().initLoader(ID_RATE_LOADER, null, rateLoaderCallbacks);
     }
 
     @Override
     public void onDetach() {
-        getLoaderManager().destroyLoader(ID_RATE_LOADER);
         listener = null;
         super.onDetach();
     }
@@ -231,11 +204,6 @@ public class OverviewFragment extends BaseFragment {
         super.onPause();
     }
 
-    @OnClick(R.id.account_balance)
-    public void onMainAmountClick(View v) {
-        if (listener != null) listener.onLocalAmountClick();
-    }
-
     @OnItemClick(R.id.account_rows)
     public void onAmountClick(int position) {
         if (position >= accountRows.getHeaderViewsCount()) {
@@ -243,7 +211,7 @@ public class OverviewFragment extends BaseFragment {
             // the latter does not take into account the header (which has position 0).
             Object obj = accountRows.getItemAtPosition(position);
 
-            if (listener != null && obj != null && obj instanceof WalletAccount) {
+            if (listener != null && obj instanceof WalletAccount) {
                 listener.onAccountSelected(((WalletAccount) obj).getId());
             } else {
                 showGenericError();
@@ -259,7 +227,7 @@ public class OverviewFragment extends BaseFragment {
             Object obj = accountRows.getItemAtPosition(position);
             Activity activity = getActivity();
 
-            if (obj != null && obj instanceof WalletAccount && activity != null) {
+            if (obj instanceof WalletAccount && activity != null) {
                 ActionMode actionMode = UiUtils.startAccountActionMode(
                         (WalletAccount) obj, activity, getFragmentManager());
                 // Hack to dismiss this action mode when back is pressed
@@ -279,74 +247,21 @@ public class OverviewFragment extends BaseFragment {
         Toast.makeText(getActivity(), getString(R.string.error_generic), Toast.LENGTH_LONG).show();
     }
 
-    private final LoaderManager.LoaderCallbacks<Cursor> rateLoaderCallbacks = new LoaderManager.LoaderCallbacks<Cursor>() {
-        @Override
-        public Loader<Cursor> onCreateLoader(final int id, final Bundle args) {
-            String localSymbol = config.getExchangeCurrencyCode();
-            return new ExchangeRateLoader(getActivity(), config, localSymbol);
-        }
-
-        @Override
-        public void onLoadFinished(final Loader<Cursor> loader, final Cursor data) {
-            if (data != null && data.getCount() > 0) {
-                ImmutableMap.Builder<String, ExchangeRate> builder = ImmutableMap.builder();
-                data.moveToFirst();
-                do {
-                    ExchangeRate rate = ExchangeRatesProvider.getExchangeRate(data);
-                    builder.put(rate.currencyCodeId, rate);
-                } while (data.moveToNext());
-
-                handler.sendMessage(handler.obtainMessage(SET_EXCHANGE_RATES, builder.build()));
-            }
-        }
-
-        @Override
-        public void onLoaderReset(final Loader<Cursor> loader) { }
-    };
-
     public void updateWallet() {
         if (wallet != null) {
             adapter.replace(wallet);
-            calculateNewBalance();
             updateView();
         }
     }
 
-    private void calculateNewBalance() {
-        currentBalance = null;
-        for (WalletAccount w : wallet.getAllAccounts()) {
-            ExchangeRate rate = exchangeRates.get(w.getCoinType().getSymbol());
-            if (rate == null) {
-                log.info("Missing exchange rate for {}, skipping...", w.getCoinType().getName());
-                continue;
-            }
-            if (currentBalance != null) {
-                currentBalance = currentBalance.add(rate.rate.convert(w.getBalance()));
-            }
-            else {
-                currentBalance = rate.rate.convert(w.getBalance());
-            }
-        }
-    }
-
-    public void setExchangeRates(Map<String, ExchangeRate> newExchangeRates) {
-        exchangeRates = newExchangeRates;
-        adapter.setExchangeRates(newExchangeRates);
-        calculateNewBalance();
-        updateView();
-    }
 
     public void updateView() {
-        if (currentBalance != null) {
-            String newBalanceStr = GenericUtils.formatFiatValue(currentBalance);
-            mainAmount.setAmount(newBalanceStr);
-            mainAmount.setSymbol(currentBalance.type.getSymbol());
-        } else {
-            mainAmount.setAmount("-.--");
-            mainAmount.setSymbol("");
-        }
-
         swipeContainer.setRefreshing(wallet.isLoading());
+    }
+
+    @Override
+    protected boolean isLoadPartnersDataEnabled() {
+        return true;
     }
 
     public interface Listener extends EditAccountFragment.Listener {

@@ -64,38 +64,12 @@
             android:textSize="@dimen/history_empty" />
     </LinearLayout>
 
-    <View
+    <RelativeLayout
+        android:id="@+id/partners_data_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp">
+        <include layout="@layout/partners_images_container" />
+    </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/iv_first_partner"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="fitXY"
-            coinomi:layout_constraintDimensionRatio="4:1"
-            coinomi:layout_constraintEnd_toEndOf="parent"
-            coinomi:layout_constraintStart_toStartOf="parent"
-            coinomi:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_second_partner"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:scaleType="fitXY"
-            coinomi:layout_constraintDimensionRatio="4:1"
-            coinomi:layout_constraintEnd_toEndOf="parent"
-            coinomi:layout_constraintStart_toStartOf="parent"
-            coinomi:layout_constraintTop_toBottomOf="@id/iv_first_partner" />
-    </android.support.constraint.ConstraintLayout>
 </LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:coinomi="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        coinomi:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:id="@+id/iv_first_partner"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"
+            coinomi:layout_constraintDimensionRatio="4:2"
+            coinomi:layout_constraintEnd_toEndOf="parent"
+            coinomi:layout_constraintStart_toStartOf="parent"
+            coinomi:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/accent" />
+
+        <ImageView
+            android:id="@+id/iv_second_partner"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:scaleType="fitXY"
+            coinomi:layout_constraintDimensionRatio="4:2"
+            coinomi:layout_constraintEnd_toEndOf="parent"
+            coinomi:layout_constraintStart_toStartOf="parent"
+            coinomi:layout_constraintTop_toBottomOf="@id/iv_first_partner"
+            tools:background="@color/accent" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
