@@ -225,6 +225,11 @@
                 android:value="com.coinomi.wallet.ui.WalletActivity" />
         </activity>
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="989805e4c48446406a77a152b5c1555cc8e85b5d"
+            />
+
         <provider
             android:name="com.coinomi.wallet.ExchangeRatesProvider"
             android:authorities="@string/exchange_rates_provider"

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "238859439125",
+    "firebase_url": "https://cryptowalletsi-d56b8.firebaseio.com",
+    "project_id": "cryptowalletsi-d56b8",
+    "storage_bucket": "cryptowalletsi-d56b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238859439125:android:dea90edb82c4e82c",
+        "android_client_info": {
+          "package_name": "com.cryptowallet.si"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "238859439125-ps9sc9d73kchrgbo0006t0kaibjpdnar.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cryptowallet.si",
+            "certificate_hash": "f28dc8c315c2102345fde8a5ac99eeefd1f9dccb"
+          }
+        },
+        {
+          "client_id": "238859439125-v71qefduq84ut09kd83kcf0hqd2aloqa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ5CYZv4_yXqKPnKUaE3qEW57SHWS8ugQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "238859439125-v71qefduq84ut09kd83kcf0hqd2aloqa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

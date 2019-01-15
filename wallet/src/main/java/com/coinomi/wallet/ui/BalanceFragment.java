@@ -36,7 +36,6 @@ import com.coinomi.wallet.ui.widget.Amount;
 import com.coinomi.wallet.ui.widget.SwipeRefreshLayout;
 import com.coinomi.wallet.util.ThrottlingWalletChangeListener;
 import com.coinomi.wallet.util.WeakHandler;
-import com.google.common.collect.Lists;
 
 import org.bitcoinj.core.Coin;
 import org.bitcoinj.core.TransactionConfidence;
@@ -44,10 +43,12 @@ import org.bitcoinj.utils.Threading;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.RejectedExecutionException;
 
 import javax.annotation.Nonnull;
@@ -428,39 +429,67 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
 
         @Override
         public List<AbstractTransaction> loadInBackground() {
-            final List<AbstractTransaction> filteredAbstractTransactions = Lists.newArrayList(account.getTransactions().values());
+            final List<AbstractTransaction> filteredTransactions = new ArrayList<>();
 
-            Collections.sort(filteredAbstractTransactions, TRANSACTION_COMPARATOR);
+            Map transactionsMap = account != null ? account.getTransactions() : null;
+            Collection<AbstractTransaction> transactions = transactionsMap != null ? transactionsMap.values() : null;
 
-            return filteredAbstractTransactions;
+            if (transactions != null && !transactions.isEmpty()) {
+                for (AbstractTransaction transaction : transactions) {
+                    if (transaction != null) {
+                        filteredTransactions.add(transaction);
+                    }
+                }
+                try {
+                    Collections.sort(filteredTransactions, TRANSACTION_COMPARATOR);
+                } catch (Throwable ignore) {
+                }
+            }
+            return filteredTransactions;
         }
 
-        private static final Comparator<AbstractTransaction> TRANSACTION_COMPARATOR = new Comparator<AbstractTransaction>() {
-            @Override
-            public int compare(final AbstractTransaction tx1, final AbstractTransaction tx2) {
-                final boolean pending1 = tx1.getConfidenceType() == TransactionConfidence.ConfidenceType.PENDING;
-                final boolean pending2 = tx2.getConfidenceType() == TransactionConfidence.ConfidenceType.PENDING;
-
-                if (pending1 != pending2)
-                    return pending1 ? -1 : 1;
-
-                // TODO use dates once implemented
-//                final Date updateTime1 = tx1.getUpdateTime();
-//                final long time1 = updateTime1 != null ? updateTime1.getTime() : 0;
-//                final Date updateTime2 = tx2.getUpdateTime();
-//                final long time2 = updateTime2 != null ? updateTime2.getTime() : 0;
-
-                // If both not pending
-                if (!pending1 && !pending2) {
-                    final int time1 = tx1.getAppearedAtChainHeight();
-                    final int time2 = tx2.getAppearedAtChainHeight();
-                    if (time1 != time2)
-                        return time1 > time2 ? -1 : 1;
-                }
-
-                return Arrays.equals(tx1.getHashBytes(),tx2.getHashBytes()) ? 1 : -1;
+        private static final Comparator<AbstractTransaction> TRANSACTION_COMPARATOR = (tx1, tx2) -> {
+            if (tx1 == null || tx2 == null) {
+                return 0;
             }
+            final boolean pending1 = tx1.getConfidenceType() == TransactionConfidence.ConfidenceType.PENDING;
+            final boolean pending2 = tx2.getConfidenceType() == TransactionConfidence.ConfidenceType.PENDING;
+
+            if (pending1 != pending2) {
+                return pending1 ? -1 : 1;
+            }
+
+            // If both not pending
+            if (!pending1) {
+                final int time1 = tx1.getAppearedAtChainHeight();
+                final int time2 = tx2.getAppearedAtChainHeight();
+                if (time1 != time2) {
+                    return time1 > time2 ? -1 : 1;
+                }
+            }
+            if (tx1.getHashBytes() == null || tx2.getHashBytes() == null) {
+                return 0;
+            }
+            return compareArrays(tx1.getHashBytes(), tx2.getHashBytes());
         };
+
+        private static int compareArrays(byte[] a, byte[] a2) {
+            if (a == null || a2 == null) {
+                return 0;
+            }
+
+            int length = a.length;
+            if (a2.length != length) {
+                return length > a2.length ? -1 : 1;
+            }
+
+            for (int i = 0; i < length; i++) {
+                if (a[i] != a2[i]) {
+                    return a[i] > a2[i] ? -1 : 1;
+                }
+            }
+            return 0;
+        }
     }
 
     private final LoaderCallbacks<Cursor> rateLoaderCallbacks = new LoaderManager.LoaderCallbacks<Cursor>() {

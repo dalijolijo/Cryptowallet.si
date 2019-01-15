@@ -662,7 +662,7 @@ public class ServerClient implements BitBlockchainConnection {
 
     @Override
     public void ping(@Nullable String versionString) {
-        if (!isActivelyConnected()) {
+        if (stratumClient == null || !isActivelyConnected()) {
             log.warn("There is no connection with {} server, skipping ping.", type.getName());
             return;
         }
