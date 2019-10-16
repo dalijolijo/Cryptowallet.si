@@ -8,7 +8,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.StrictMode;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
@@ -47,8 +46,6 @@ import javax.annotation.Nullable;
 
 import io.fabric.sdk.android.Fabric;
 
-import static com.coinomi.core.Preconditions.checkNotNull;
-
 /**
  * @author John L. Jegutanis
  * @author Andreas Schildbach
@@ -62,6 +59,7 @@ public class WalletApplication extends Application {
     private static final Logger log = LoggerFactory.getLogger(WalletApplication.class);
 
     private static HashMap<String, Typeface> typefaces;
+    private static WalletApplication instance;
     private Configuration config;
     private ActivityManager activityManager;
 
@@ -82,6 +80,7 @@ public class WalletApplication extends Application {
     @Override
     public void onCreate() {
 //        ACRA.init(this);
+        instance = this;
         Fabric.with(this, new Crashlytics());
         config = new Configuration(PreferenceManager.getDefaultSharedPreferences(this));
 
@@ -131,6 +130,10 @@ public class WalletApplication extends Application {
         Fonts.initFonts(this.getAssets());
     }
 
+    public synchronized static WalletApplication getInstance() {
+        return instance;
+    }
+
     private void createTxCache() {
         txCachePath = new File(this.getCacheDir(), Constants.TX_CACHE_NAME);
         if (!txCachePath.exists()) {
@@ -165,8 +168,6 @@ public class WalletApplication extends Application {
         if (!config.isDeviceCompatible()) {
             if (!HardwareSoftwareCompliance.isEllipticCurveCryptographyCompliant()) {
                 config.setDeviceCompatible(false);
-                ACRA.getErrorReporter().handleSilentException(
-                        new Exception("Device failed EllipticCurveCryptographyCompliant test"));
             } else {
                 config.setDeviceCompatible(true);
             }

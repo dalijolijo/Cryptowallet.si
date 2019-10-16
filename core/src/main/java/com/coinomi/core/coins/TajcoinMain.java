@@ -1,11 +1,13 @@
 package com.coinomi.core.coins;
 
+import com.coinomi.core.PartnersInfoData;
 import com.coinomi.core.coins.families.PeerFamily;
+import com.coinomi.core.coins.nxt.Constants;
 
 /**
  * @author John L. Jegutanis
  */
-public class TajcoinMain extends PeerFamily {
+public class TajcoinMain extends PeerFamily implements PartnersInfoData {
     private TajcoinMain() {
         id = "tajcoin.main";
 
@@ -30,5 +32,10 @@ public class TajcoinMain extends PeerFamily {
     private static TajcoinMain instance = new TajcoinMain();
     public static synchronized CoinType get() {
         return instance;
+    }
+
+    @Override
+    public String getPartnerUrl() {
+        return Constants.PARTNERS_URI_TAJ;
     }
 }

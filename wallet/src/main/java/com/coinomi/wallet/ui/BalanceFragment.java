@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.coinomi.core.PartnersInfoData;
 import com.coinomi.core.coins.CoinType;
 import com.coinomi.core.coins.Value;
 import com.coinomi.core.util.GenericUtils;
@@ -549,8 +550,17 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
     }
 
     @Override
-    protected boolean isLoadPartnersDataEnabled() {
+    protected boolean enableLoadingPartnersData() {
         return true;
+    }
+
+    @Override
+    protected String getPartnersDataUri() {
+        String partnersDataUri = super.getPartnersDataUri();
+        if (type instanceof PartnersInfoData) {
+            partnersDataUri = ((PartnersInfoData) type).getPartnerUrl();
+        }
+        return partnersDataUri;
     }
 
     private void clearLabelCache() {

@@ -260,7 +260,7 @@ public class OverviewFragment extends BasePartnersDataFragment {
     }
 
     @Override
-    protected boolean isLoadPartnersDataEnabled() {
+    protected boolean enableLoadingPartnersData() {
         return true;
     }
 

@@ -33,6 +33,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.coinomi.core.PartnersInfoData;
 import com.coinomi.core.coins.CoinID;
 import com.coinomi.core.coins.CoinType;
 import com.coinomi.core.coins.FiatType;
@@ -337,17 +338,28 @@ public class SendFragment extends WalletFragment {
     @Override
     public void onViewCreated(@NonNull View view, @android.support.annotation.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        partnersContainer.setVisibility(isLoadPartnersDataEnabled() ? View.VISIBLE : View.GONE);
+        partnersContainer.setVisibility(enableLoadingPartnersData() ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    protected boolean isLoadPartnersDataEnabled() {
+    protected boolean enableLoadingPartnersData() {
         return messageFactory == null;
+    }
+
+    @Override
+    protected String getPartnersDataUri() {
+        String partnersDataUri = super.getPartnersDataUri();
+        if (sendAmountType instanceof PartnersInfoData) {
+            partnersDataUri = ((PartnersInfoData) sendAmountType).getPartnerUrl();
+        }
+        return partnersDataUri;
     }
 
     @Override
     public void onDestroyView() {
         config.setLastExchangeDirection(amountCalculatorLink.getExchangeDirection());
+        sendToAddressView.setOnFocusChangeListener(null);
+        sendToAddressView.addTextChangedListener(receivingAddressListener);
         amountCalculatorLink = null;
         sendToAdapter = null;
         super.onDestroyView();
@@ -890,7 +902,14 @@ public class SendFragment extends WalletFragment {
 
     private void validateAddress(boolean isTyping) {
         if (address == null) {
-            String input = sendToAddressView.getText().toString().trim();
+            if (sendToAddressView == null) {
+                View rootView = getView();
+                sendToAddressView = rootView != null ? rootView.findViewById(R.id.send_to_address) : null;
+            }
+            String input = "";
+            if (sendToAddressView != null) {
+               input = sendToAddressView.getText().toString().trim();
+            }
 
             try {
                 if (!input.isEmpty()) {

@@ -170,7 +170,7 @@ public class StratumClient extends AbstractExecutionThreadService {
         while (isRunning() && isConnected()) {
             try {
                 serverMessage = fromServer.readLine();
-            } catch (IOException e) {
+            } catch (Throwable e) {
                 if (isRunning()) {
                     log.info("Error communicating with server: {}", e.getMessage());
                     triggerShutdown();

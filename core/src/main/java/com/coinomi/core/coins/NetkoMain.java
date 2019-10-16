@@ -1,11 +1,13 @@
 package com.coinomi.core.coins;
 
+import com.coinomi.core.PartnersInfoData;
 import com.coinomi.core.coins.families.PeerFamily;
+import com.coinomi.core.coins.nxt.Constants;
 
 /**
  * @author John L. Jegutanis
  */
-public class NetkoMain extends PeerFamily {
+public class NetkoMain extends PeerFamily implements PartnersInfoData {
     private NetkoMain() {
         id = "netko.main";
 
@@ -30,5 +32,10 @@ public class NetkoMain extends PeerFamily {
     private static NetkoMain instance = new NetkoMain();
     public static synchronized CoinType get() {
         return instance;
+    }
+
+    @Override
+    public String getPartnerUrl() {
+        return Constants.PARTNERS_URI_NETKO;
     }
 }

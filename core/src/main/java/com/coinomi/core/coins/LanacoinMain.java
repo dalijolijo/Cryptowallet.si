@@ -1,11 +1,13 @@
 package com.coinomi.core.coins;
 
+import com.coinomi.core.PartnersInfoData;
 import com.coinomi.core.coins.families.PeerFamily;
+import com.coinomi.core.coins.nxt.Constants;
 
 /**
  * @author John L. Jegutanis
  */
-public class LanacoinMain extends PeerFamily {
+public class LanacoinMain extends PeerFamily implements PartnersInfoData {
     private LanacoinMain() {
         id = "lanacoin.main";
 
@@ -30,5 +32,10 @@ public class LanacoinMain extends PeerFamily {
     private static LanacoinMain instance = new LanacoinMain();
     public static synchronized CoinType get() {
         return instance;
+    }
+
+    @Override
+    public String getPartnerUrl() {
+        return Constants.PARTNERS_URI_LANA;
     }
 }

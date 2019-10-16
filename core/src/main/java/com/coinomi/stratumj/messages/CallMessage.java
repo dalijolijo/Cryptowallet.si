@@ -97,12 +97,4 @@ public class CallMessage extends BaseMessage {
             throw new RuntimeException(e);
         }
     }
-//
-//    public void addParams(Collection params) {
-//        getParams().put(params);
-//    }
-//
-//    public void addParam(String param) {
-//        getParams().put(param);
-//    }
 }

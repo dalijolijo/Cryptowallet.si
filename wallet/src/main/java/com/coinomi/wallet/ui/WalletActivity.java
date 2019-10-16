@@ -284,7 +284,7 @@ final public class WalletActivity extends BaseWalletActivity implements
             FragmentTransaction ft = getFM().beginTransaction();
             ft.show(overviewFragment);
             if (accountFragment != null) ft.hide(accountFragment);
-            ft.commit();
+            ft.commitAllowingStateLoss();
             isOverviewVisible = true;
             connectAllCoinService();
             if (selectInNavDrawer) {

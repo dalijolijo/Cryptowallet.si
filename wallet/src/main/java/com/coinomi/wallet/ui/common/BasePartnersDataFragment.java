@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
+import com.coinomi.core.coins.nxt.Constants;
 import com.coinomi.wallet.R;
 import com.coinomi.wallet.tasks.GetPartnersDataTask;
 import com.coinomi.wallet.tasks.HttpRequestsFactory;
@@ -36,7 +37,7 @@ public class BasePartnersDataFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (isLoadPartnersDataEnabled()) {
+        if (enableLoadingPartnersData()) {
             Log.e("PARTNER", "load partners data ->" + this.getClass().getSimpleName());
             loadPartnersData();
         }
@@ -54,7 +55,7 @@ public class BasePartnersDataFragment extends BaseFragment {
                 }
             }
         };
-        TasksLoader.INSTANCE.loadPartnersData(partnerResponse);
+        TasksLoader.INSTANCE.loadPartnersData(partnerResponse, getPartnersDataUri());
     }
 
     private void loadPartnersImages(GetPartnersDataTask.PartnerData data1, GetPartnersDataTask.PartnerData data2) {
@@ -99,11 +100,15 @@ public class BasePartnersDataFragment extends BaseFragment {
         partnerResponse = null;
     }
 
-    protected boolean isLoadPartnersDataEnabled() {
+    protected boolean enableLoadingPartnersData() {
         return false;
     }
 
     protected boolean showBothImages() {
         return true;
+    }
+
+    protected String getPartnersDataUri() {
+        return Constants.PARTNERS_URI_OVERVIEW;
     }
 }

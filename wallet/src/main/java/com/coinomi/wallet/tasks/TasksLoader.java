@@ -5,10 +5,7 @@ import java.util.List;
 public enum TasksLoader {
     INSTANCE;
 
-    private GenericTask<List<GetPartnersDataTask.PartnerData>> partnersTask;
-
-    public void loadPartnersData(HttpRequestsFactory.Response<List<GetPartnersDataTask.PartnerData>> responseListener) {
-        partnersTask = new GetPartnersDataTask(responseListener);
-        partnersTask.execute(0);
+    public void loadPartnersData(HttpRequestsFactory.Response<List<GetPartnersDataTask.PartnerData>> responseListener, String uri) {
+        new GetPartnersDataTask(responseListener, uri).execute(0);
     }
 }

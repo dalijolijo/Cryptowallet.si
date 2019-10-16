@@ -1,11 +1,13 @@
 package com.coinomi.core.coins;
 
+import com.coinomi.core.PartnersInfoData;
 import com.coinomi.core.coins.families.PeerFamily;
+import com.coinomi.core.coins.nxt.Constants;
 
 /**
  * @author John L. Jegutanis
  */
-public class AquariuscoinMain extends PeerFamily {
+public class AquariuscoinMain extends PeerFamily implements PartnersInfoData {
     private AquariuscoinMain() {
         id = "aquariuscoin.main";
 
@@ -30,5 +32,10 @@ public class AquariuscoinMain extends PeerFamily {
     private static AquariuscoinMain instance = new AquariuscoinMain();
     public static synchronized CoinType get() {
         return instance;
+    }
+
+    @Override
+    public String getPartnerUrl() {
+        return Constants.PARTNERS_URI_ARCO;
     }
 }
