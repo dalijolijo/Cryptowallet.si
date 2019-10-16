@@ -7,15 +7,19 @@ repositories {
 }
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion rootProject.ext.target_sdk
+    buildToolsVersion rootProject.ext.build_tools
 
     defaultConfig {
         applicationId "com.cryptowallet.si"
-        minSdkVersion 21
-        targetSdkVersion 27
-        versionCode 6
-        versionName "v2.0.1"
+        minSdkVersion rootProject.ext.min_sdk
+        targetSdkVersion rootProject.ext.target_sdk
+        versionCode 7
+        versionName "v2.0.2"
+
+        ndk {
+            abiFilters 'armeabi-v7a', 'x86', 'armeabi', 'x86_64', 'arm64-v8a'
+        }
     }
 
     buildTypes {
@@ -46,6 +50,8 @@ android {
         // but continue the build even when errors are found:
         abortOnError false
     }
+
+
 }
 
 repositories {
@@ -54,26 +60,17 @@ repositories {
     }
 }
 
-//sourceSets {
-//    unitTest {
-//        java.srcDir file('src/test/java')
-//        resources.srcDir file('src/test/resources')
-//    }
-//}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation fileTree(dir: '../core/libs', include: ['*.jar'])
-    // Testing
-//    androidTestimplementation 'junit:junit:4.11'
-//    androidTestimplementation 'org.robolectric:robolectric:2.3'
-//    androidTestimplementation 'com.squareup:fest-android:1.0.+'
     implementation project(':core')
+
     //noinspection GradleCompatible
     implementation "com.android.support:gridlayout-v7:${supportVersion}"
     implementation "com.android.support:support-v4:${supportVersion}"
     implementation "com.android.support:appcompat-v7:${supportVersion}"
-//    implementation 'com.android.support:preference-v7:23.2.1'
+
     implementation 'com.google.guava:guava:16.0.1'
     implementation 'com.google.code.findbugs:jsr305:2.0.1'
     implementation 'com.madgag.spongycastle:core:1.51.0.0'
@@ -96,19 +93,4 @@ dependencies {
         transitive = true;
     }
 }
-
-//apply plugin: 'robolectric'
-
-//robolectric {
-//    include '**/*Test.class'
-//    exclude '**/espresso/**/*.class'
-//}
-
-//apply plugin: 'idea'
-
-//idea {
-//    module {
-//        testOutputDir = file('build/test-classes/debug')
-//    }
-//}
 
