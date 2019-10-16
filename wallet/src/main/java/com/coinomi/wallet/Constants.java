@@ -15,6 +15,7 @@ import com.coinomi.stratumj.ServerAddress;
 import com.google.common.collect.ImmutableList;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -86,35 +87,11 @@ public class Constants {
     public static final String BINARY_URL = "https://github.com/CryptowalletSi/Cryptowallet.si/releases";
 
     public static final String VERSION_URL = "https://cryptowallet.si/version";
-    public static final String PARTNERS_URI = "https://cryptowallet.si/partner.json";
     public static final String SUPPORT_EMAIL = "support@cryptowallet.si";
-
-    // TODO move to resource files
-    public static final List<CoinAddress> DEFAULT_COINS_SERVERS = ImmutableList.of(
-            new CoinAddress(NevacoinMain.get(),     new ServerAddress("node1.cryptowallet.si", 5096),
-                                                    new ServerAddress("node2.cryptowallet.si", 5096),
-                                                    new ServerAddress("node3.cryptowallet.si", 5096),
-                                                    new ServerAddress("node4.cryptowallet.si", 5096)),
-            new CoinAddress(NetkoMain.get(),        new ServerAddress("node1.cryptowallet.si", 5108),
-                                                    new ServerAddress("node2.cryptowallet.si", 5108),
-                                                    new ServerAddress("node3.cryptowallet.si", 5108),
-                                                    new ServerAddress("node4.cryptowallet.si", 5108)),
-            new CoinAddress(AquariuscoinMain.get(), new ServerAddress("node1.cryptowallet.si", 5095),
-                                                    new ServerAddress("node2.cryptowallet.si", 5095),
-                                                    new ServerAddress("node3.cryptowallet.si", 5095),
-                                                    new ServerAddress("node4.cryptowallet.si", 5095)),
-            new CoinAddress(LanacoinMain.get(),     new ServerAddress("node1.cryptowallet.si", 5097),
-                                                    new ServerAddress("node2.cryptowallet.si", 5097),
-                                                    new ServerAddress("node3.cryptowallet.si", 5097),
-                                                    new ServerAddress("node4.cryptowallet.si", 5097)),
-            new CoinAddress(TajcoinMain.get(),      new ServerAddress("node1.cryptowallet.si", 5098),
-                                                    new ServerAddress("node2.cryptowallet.si", 5098),
-                                                    new ServerAddress("node3.cryptowallet.si", 5098),
-                                                    new ServerAddress("node4.cryptowallet.si", 5098))
-    );
 
     public static final HashMap<CoinType, Integer> COINS_ICONS;
     public static final HashMap<CoinType, String> COINS_BLOCK_EXPLORERS;
+
     static {
         COINS_ICONS = new HashMap<>();
         COINS_ICONS.put(CoinID.NEVACOIN_MAIN.getCoinType(), R.drawable.nevacoin);
@@ -141,4 +118,72 @@ public class Constants {
             NetkoMain.get(),
             TajcoinMain.get()
     );
+
+    public static List<CoinAddress> getCoinsServerAddresses() {
+        return getEnabledCoinsServerAddresses(false);
+    }
+
+    public static List<CoinAddress> getEnabledCoinsServerAddresses() {
+        return getEnabledCoinsServerAddresses(true);
+    }
+
+    private static List<CoinAddress> getEnabledCoinsServerAddresses(boolean filterEnabled) {
+        ArrayList<CoinAddress> coinAddresses = new ArrayList<>();
+        for (CoinType supportedCoins : SUPPORTED_COINS) {
+            coinAddresses.add(getCoinAddress(supportedCoins, filterEnabled));
+        }
+        return coinAddresses;
+    }
+
+    private static CoinAddress getCoinAddress(CoinType coinType, boolean filterEnabled) {
+        ArrayList<ServerAddress> addressesForCoin = new ArrayList<>();
+        if (coinType instanceof NevacoinMain) {
+            addressesForCoin.add(new ServerAddress("node1.cryptowallet.si", 5096));
+            addressesForCoin.add(new ServerAddress("node2.cryptowallet.si", 5096));
+            addressesForCoin.add(new ServerAddress("node3.cryptowallet.si", 5096));
+            addressesForCoin.add(new ServerAddress("node4.cryptowallet.si", 5096));
+        } else if (coinType instanceof LanacoinMain) {
+            addressesForCoin.add(new ServerAddress("node1.cryptowallet.si", 5097));
+            addressesForCoin.add(new ServerAddress("node2.cryptowallet.si", 5097));
+            addressesForCoin.add(new ServerAddress("node3.cryptowallet.si", 5097));
+            addressesForCoin.add(new ServerAddress("node4.cryptowallet.si", 5097));
+        } else if (coinType instanceof TajcoinMain) {
+            addressesForCoin.add(new ServerAddress("node1.cryptowallet.si", 5098));
+            addressesForCoin.add(new ServerAddress("node2.cryptowallet.si", 5098));
+            addressesForCoin.add(new ServerAddress("node3.cryptowallet.si", 5098));
+            addressesForCoin.add(new ServerAddress("node4.cryptowallet.si", 5098));
+        } else if (coinType instanceof AquariuscoinMain) {
+            addressesForCoin.add(new ServerAddress("node1.cryptowallet.si", 5095));
+            addressesForCoin.add(new ServerAddress("node2.cryptowallet.si", 5095));
+            addressesForCoin.add(new ServerAddress("node3.cryptowallet.si", 5095));
+            addressesForCoin.add(new ServerAddress("node4.cryptowallet.si", 5095));
+        } else if (coinType instanceof NetkoMain) {
+            addressesForCoin.add(new ServerAddress("node1.cryptowallet.si", 5108));
+            addressesForCoin.add(new ServerAddress("node2.cryptowallet.si", 5108));
+            addressesForCoin.add(new ServerAddress("node3.cryptowallet.si", 5108));
+            addressesForCoin.add(new ServerAddress("node4.cryptowallet.si", 5108));
+        }
+
+        // check for user defined addresses
+        addUserDefinedAddresses(addressesForCoin, coinType, filterEnabled);
+
+        return new CoinAddress(coinType, addressesForCoin);
+    }
+
+    private static void addUserDefinedAddresses(ArrayList<ServerAddress> addressesForCoin, CoinType coinType, boolean filterEnabled) {
+        List<ServerAddress> userDefinedCoinAddresses = WalletApplication.getInstance().getConfiguration().getUserDefinedCoinAddresses(coinType);
+        if (filterEnabled) {
+            for (ServerAddress sa : userDefinedCoinAddresses) {
+                if (sa.isEnabled()) {
+                    addressesForCoin.add(sa);
+                }
+            }
+        } else {
+            addressesForCoin.addAll(userDefinedCoinAddresses);
+        }
+    }
+
+    private static CoinAddress getCoinAddress(CoinType coinType) {
+        return getCoinAddress(coinType, false);
+    }
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<LinearLayout
+		android:id="@+id/coinInfoLinkPlaceHolder"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:orientation="vertical"
+		android:paddingStart="@dimen/activity_horizontal_margin"
+		android:paddingLeft="@dimen/activity_horizontal_margin"
+		android:paddingTop="@dimen/activity_vertical_margin"
+		android:paddingEnd="@dimen/activity_horizontal_margin"
+		android:paddingRight="@dimen/activity_horizontal_margin"
+		android:paddingBottom="@dimen/activity_vertical_margin">
+
+		<TextView
+			android:id="@+id/coinInfoTitle"
+			style="@style/SeedText"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp"
+			tools:text="Netko - NETKO" />
+
+		<ImageView
+			android:id="@+id/coinInfoIv"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="20dp"
+			android:layout_marginBottom="20dp"
+			android:src="@drawable/netko" />
+
+	</LinearLayout>
+
+</ScrollView>

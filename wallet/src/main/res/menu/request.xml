@@ -22,4 +22,12 @@
         android:title="@string/action_new_address"
         android:icon="@drawable/plus_menu"
         app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_connections"
+        android:title="@string/menu_option_connections"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_coin_links"
+        android:title="@string/menu_option_coin_links"
+        app:showAsAction="never" />
 </menu>

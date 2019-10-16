@@ -13,6 +13,7 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.text.format.DateUtils;
 
+import com.coinomi.core.network.CoinAddress;
 import com.coinomi.core.network.ConnectivityHelper;
 import com.coinomi.core.network.ServerClients;
 import com.coinomi.core.wallet.AbstractAddress;
@@ -28,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -236,7 +238,7 @@ public class CoinServiceImpl extends Service implements CoinService {
     };
 
     private ServerClients getServerClients(Wallet wallet) {
-        ServerClients newClients = new ServerClients(Constants.DEFAULT_COINS_SERVERS, connHelper);
+        ServerClients newClients = new ServerClients(Constants.getEnabledCoinsServerAddresses(), connHelper);
         if (application.getTxCachePath() != null) {
             newClients.setCacheDir(application.getTxCachePath(), Constants.TX_CACHE_SIZE);
         }

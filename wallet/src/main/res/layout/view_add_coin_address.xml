@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_margin="20dp"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+	<TextView
+		android:id="@+id/coinDescription"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		android:layout_marginTop="20dp"
+		android:text="@string/connections_adding_new_address_description"
+		style="@style/NormalBoldText"
+		app:layout_constraintEnd_toEndOf="parent" />
+
+
+	<EditText
+		android:id="@+id/coinHostname"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		style="@style/NormalText"
+		app:layout_constraintTop_toBottomOf="@id/coinDescription"
+		android:hint="@string/connections_hostname"
+		android:nextFocusRight="@id/coinPortAddress"
+		android:imeOptions="actionNext"
+		app:layout_constraintEnd_toStartOf="@id/coinPortAddress"
+		android:layout_marginEnd="20dp"
+		android:maxLines="1"
+		android:layout_marginTop="20dp"
+		android:inputType="text"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<EditText
+		android:id="@+id/coinPortAddress"
+		android:layout_width="65dp"
+		style="@style/NormalText"
+		android:layout_height="wrap_content"
+		android:inputType="numberSigned"
+		android:maxLines="1"
+		android:imeOptions="actionDone"
+		android:hint="@string/connections_port"
+		app:layout_constraintTop_toTopOf="@id/coinHostname"
+		app:layout_constraintEnd_toEndOf="parent" />
+
+	<Button
+		android:id="@+id/coinAddButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintTop_toBottomOf="@id/coinPortAddress"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		android:layout_marginTop="20dp"
+		android:enabled="false"
+		android:text="@string/connections_add_address" />
+
+</android.support.constraint.ConstraintLayout>

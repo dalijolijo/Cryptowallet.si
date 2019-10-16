@@ -175,7 +175,7 @@ public class SweepWalletFragment extends BaseFragment {
                 }
             };
 
-            serverClients = new ServerClients(Constants.DEFAULT_COINS_SERVERS, connHelper);
+            serverClients = new ServerClients(Constants.getEnabledCoinsServerAddresses(), connHelper);
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement " + Listener.class);
         }

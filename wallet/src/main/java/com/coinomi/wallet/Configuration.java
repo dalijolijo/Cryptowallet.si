@@ -6,15 +6,21 @@ import android.text.format.DateUtils;
 
 import com.coinomi.core.coins.CoinType;
 import com.coinomi.core.coins.Value;
+import com.coinomi.stratumj.ServerAddress;
 import com.coinomi.wallet.util.WalletUtils;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -244,6 +250,48 @@ public class Configuration {
 
     public void setTermAccepted(final boolean isTermsAccepted) {
         prefs.edit().putBoolean(PREFS_KEY_TERMS_ACCEPTED, isTermsAccepted).apply();
+    }
+
+    public void addCoinAddress(ServerAddress serverAddress, CoinType coinType) {
+        Set<String> stringSet = prefs.getStringSet(coinType.getSymbol(), new HashSet<>());
+        stringSet.add(new Gson().toJson(serverAddress));
+        prefs.edit().putStringSet(coinType.getSymbol(), stringSet).apply();
+    }
+
+    public void removeCoinAddress(ServerAddress serverAddress, CoinType coinType) {
+        HashSet<String> stringSet = (HashSet<String>)prefs.getStringSet(coinType.getSymbol(), new HashSet<>());
+        for (String s : stringSet) {
+            ServerAddress savedAddress = new Gson().fromJson(s, ServerAddress.class);
+            if (savedAddress.getHost().equals(serverAddress.getHost())
+                    && savedAddress.getPort() == serverAddress.getPort()) {
+                stringSet.remove(s);
+            }
+        }
+        prefs.edit().putStringSet(coinType.getSymbol(), stringSet).apply();
+    }
+
+    public void enableCoinAddress(ServerAddress serverAddress, CoinType coinType) {
+        HashSet<String> stringSet = (HashSet<String>)prefs.getStringSet(coinType.getSymbol(), new HashSet<>());
+        for (String s : stringSet) {
+            ServerAddress savedAddress = new Gson().fromJson(s, ServerAddress.class);
+            if (savedAddress.getHost().equals(serverAddress.getHost())
+                    && savedAddress.getPort() == serverAddress.getPort()) {
+                // remove prev version and add new one
+                stringSet.remove(s);
+                stringSet.add(new Gson().toJson(serverAddress));
+            }
+        }
+        prefs.edit().putStringSet(coinType.getSymbol(), stringSet).apply();
+    }
+
+    public List<ServerAddress> getUserDefinedCoinAddresses(CoinType coinType) {
+        HashSet<String> stringSet = (HashSet<String>)prefs.getStringSet(coinType.getSymbol(), new HashSet<>());
+
+        List<ServerAddress> addresses = new ArrayList<>();
+        for (String a : stringSet) {
+            addresses.add(new Gson().fromJson(a, ServerAddress.class));
+        }
+        return addresses;
     }
 
 }

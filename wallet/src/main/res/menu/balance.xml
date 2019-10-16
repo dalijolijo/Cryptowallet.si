@@ -24,4 +24,13 @@
     <item android:id="@+id/action_sweep_wallet"
         android:title="@string/action_sweep_wallet"
         app:showAsAction="never" />
+
+    <item android:id="@+id/action_connections"
+        android:title="@string/menu_option_connections"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_coin_links"
+        android:title="@string/menu_option_coin_links"
+        app:showAsAction="never" />
+
 </menu>
