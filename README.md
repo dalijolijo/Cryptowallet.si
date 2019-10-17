@@ -33,3 +33,9 @@
 - https://github.com/Taj-Coin/electrum-tajcoin-server
 - https://github.com/NetkoCoin/electrum-netko-server
 - https://github.com/Nevacoin/electrum-nevacoin-server
+
+### BIP39 tool for private key extraction from backup seed words
+
+- https://github.com/CryptowalletSi/bip39
+
+- https://github.com/CryptowalletSi/bip39/archive/master.zip
