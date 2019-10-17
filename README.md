@@ -25,3 +25,11 @@
 - https://github.com/NetkoCoin/netko
 
 ### Privacy policy https://cryptowallet.si/privacy.html
+
+### Electrum server source code
+
+- https://github.com/AquariusNetwork/electrum-aquariuscoin-server
+- https://github.com/LanaCoin/electrum-lanacoin-server
+- https://github.com/Taj-Coin/electrum-tajcoin-server
+- https://github.com/NetkoCoin/electrum-netko-server
+- https://github.com/Nevacoin/electrum-nevacoin-server
