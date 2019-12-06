@@ -1,66 +1,35 @@
-# Use an official Ubuntu runtime as a parent image
-FROM ubuntu:16.04
-#FROM eternnoir/ubuntu-java:openjdk-7
-#FROM eternnoir/ubuntu-java:oracle-java8
+#FROM gradle:4.10.0-jdk8
+FROM gradle:5.4.1-jdk8
 
 USER root
 
-# Change sh to bash
-SHELL ["/bin/bash", "-c"]
+ENV SDK_URL="https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip" \
+    ANDROID_HOME="/usr/local/android-sdk" \
+    ANDROID_VERSION=28 \
+    ANDROID_BUILD_TOOLS_VERSION=28.0.3
 
-ENV ANDROID_HOME="/opt/android-sdk-linux"
-ENV JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre"
+#    supportVersion = "28.0.0"
+#    min_sdk = 21
+#    target_sdk = 28
+#    build_tools = "28.0.3"
+#    classpath 'com.android.tools.build:gradle:3.5.1'
 
-# Running updates and installing required packages
-RUN echo '*** Running updates and installing required packages ***' && \
-    apt-get update -y && \
-    apt-get install -y curl \
-                        git \
-                        openjdk-8-jdk \
-                        vim \
-                        wget \
-                        zip \
-                        unzip
+# Download Android SDK
+RUN mkdir "$ANDROID_HOME" .android \
+    && cd "$ANDROID_HOME" \
+    && curl -o sdk.zip $SDK_URL \
+    && unzip sdk.zip \
+    && rm sdk.zip \
+    && mkdir "$ANDROID_HOME/licenses" || true \
+    && echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > "$ANDROID_HOME/licenses/android-sdk-license"
+#    && yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses
 
-# create sdk folder
-RUN mkdir -p $ANDROID_HOME
+# Install Android Build Tool and Libraries
+RUN $ANDROID_HOME/tools/bin/sdkmanager --update
+RUN $ANDROID_HOME/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
+    "platforms;android-${ANDROID_VERSION}" \
+    "platform-tools"
 
-# set JAVA_HOME and ANDROID_HOME
-RUN echo 'JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre"' >> /etc/environment && \
-    echo 'ANDROID_HOME="/opt/android-sdk-linux"' >> /etc/environment && \
-    source /etc/environment && \
-    cat /etc/environment
+# Install Build Essentials
+RUN apt-get update && apt-get install build-essential -y && apt-get install file -y && apt-get install apt-utils -y
 
-# download android sdk
-RUN cd $ANDROID_HOME && \
-    wget https://dl.google.com/android/repository/tools_r25.2.3-linux.zip && \
-    unzip tools_r25.2.3-linux.zip
-
-# install all sdk packages
-RUN cd ${ANDROID_HOME}/tools && \
-    ./android update sdk --no-ui 
-
-# set path
-RUN export PATH=${PATH}:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/tools:${ANDROID_HOME}/build-tools/29.0.2/ && \
-    source /etc/profile
-
-# accept license
-RUN echo "y" | ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-28"
-RUN echo "y" | ${ANDROID_HOME}/tools/bin/sdkmanager "build-tools;28.0.3"
-RUN echo "y" | ${ANDROID_HOME}/tools/bin/sdkmanager "ndk-bundle"
-RUN echo "y" | ${ANDROID_HOME}/tools/bin/sdkmanager "tools"
-RUN ${ANDROID_HOME}/tools/bin/sdkmanager --list
-
-# build APK
-RUN cd && git clone -b master https://github.com/CryptowalletSi/Cryptowallet.si.git
-#RUN rm ~/neblio-android/wallet/build.gradle
-#COPY build.gradle ~/neblio-android/wallet 
-RUN export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8  && \
-    cd  ~/Cryptowallet.si && \
-    ./gradlew && \
-    ./gradlew assembleRelease
-
-RUN echo "Find APK in: /root/Cryptowallet.si/wallet/build/outputs/apk/release/wallet-release-unsigned.apk"
-
-ENV TERM linux
-CMD ["/bin/bash"]
