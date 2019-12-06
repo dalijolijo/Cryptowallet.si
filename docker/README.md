@@ -4,9 +4,9 @@ cd /root/Cryptowallet.si/docker
 docker build -t si .
 
 screen 
-docker run -it si bash
+docker run --name wallet -it si bash
 #<ctrl>+A
 #<ctrl>+D
 
-docker cp si:/root/Cryptowallet.si/wallet/build/outputs/apk/release/wallet-release-unsigned.apk .
+docker cp wallet:/root/Cryptowallet.si/wallet/build/outputs/apk/release/wallet-release-unsigned.apk .
 ```
