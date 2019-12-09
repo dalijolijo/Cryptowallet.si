@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.coinomi.core.coins.BitcoreMain;
 import com.coinomi.core.coins.AquariuscoinMain;
 import com.coinomi.core.coins.CoinType;
 import com.coinomi.core.coins.LanacoinMain;
@@ -73,6 +74,8 @@ public class CoinInfoActivity extends BaseWalletActivity {
             stringArrayId = R.array.taj_coin;
         } else if (coinType instanceof AquariuscoinMain) {
             stringArrayId = R.array.arco_coin;
+        } else if (coinType instanceof BitcoreMain) {
+            stringArrayId = R.array.btx_coin;
         }
         addLinks(stringArrayId);
     }

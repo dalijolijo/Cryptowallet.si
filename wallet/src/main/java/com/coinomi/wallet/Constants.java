@@ -2,6 +2,7 @@ package com.coinomi.wallet;
 
 import android.text.format.DateUtils;
 
+import com.coinomi.core.coins.BitcoreMain;
 import com.coinomi.core.coins.AquariuscoinMain;
 import com.coinomi.core.coins.BitcoinMain;
 import com.coinomi.core.coins.CoinID;
@@ -99,6 +100,7 @@ public class Constants {
         COINS_ICONS.put(CoinID.AQUARIUSCOIN_MAIN.getCoinType(), R.drawable.aquariuscoin);
         COINS_ICONS.put(CoinID.LANACOIN_MAIN.getCoinType(), R.drawable.lanacoin);
         COINS_ICONS.put(CoinID.TAJCOIN_MAIN.getCoinType(), R.drawable.tajcoin);
+	COINS_ICONS.put(CoinID.BITCORE_MAIN.getCoinType(), R.drawable.bitcore);
 
         COINS_BLOCK_EXPLORERS = new HashMap<>();
         COINS_BLOCK_EXPLORERS.put(CoinID.NEVACOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/neva/tx.dws?%s");
@@ -106,6 +108,7 @@ public class Constants {
         COINS_BLOCK_EXPLORERS.put(CoinID.AQUARIUSCOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/arco/tx.dws?%s");
         COINS_BLOCK_EXPLORERS.put(CoinID.LANACOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/lana/tx.dws?%s");
         COINS_BLOCK_EXPLORERS.put(CoinID.TAJCOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/taj/tx.dws?%s");
+	COINS_BLOCK_EXPLORERS.put(CoinID.BITCORE_MAIN.getCoinType(), "https://chainz.cryptoid.info/btx/tx.dws?%s");
     }
 
     public static final CoinType DEFAULT_COIN = BitcoinMain.get();
