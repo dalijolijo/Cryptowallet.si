@@ -12,12 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coinomi.core.coins.BitcoreMain;
-import com.coinomi.core.coins.AquariuscoinMain;
 import com.coinomi.core.coins.CoinType;
-import com.coinomi.core.coins.LanacoinMain;
-import com.coinomi.core.coins.NetkoMain;
-import com.coinomi.core.coins.NevacoinMain;
-import com.coinomi.core.coins.TajcoinMain;
 import com.coinomi.core.wallet.WalletAccount;
 import com.coinomi.wallet.Constants;
 import com.coinomi.wallet.R;
@@ -64,18 +59,9 @@ public class CoinInfoActivity extends BaseWalletActivity {
         setupTitleAndImage(coinType);
 
         int stringArrayId = -1;
-        if (coinType instanceof NevacoinMain) {
-            stringArrayId = R.array.neva_coin;
-        } else if (coinType instanceof NetkoMain) {
-            stringArrayId = R.array.netko_coin;
-        } else if (coinType instanceof LanacoinMain) {
-            stringArrayId = R.array.lana_coin;
-        } else if (coinType instanceof TajcoinMain) {
-            stringArrayId = R.array.taj_coin;
-        } else if (coinType instanceof AquariuscoinMain) {
-            stringArrayId = R.array.arco_coin;
-        } else if (coinType instanceof BitcoreMain) {
+        if (coinType instanceof BitcoreMain) {
             stringArrayId = R.array.btx_coin;
+        //} else if (coinType instanceof BitsendMain) {
         }
         addLinks(stringArrayId);
     }

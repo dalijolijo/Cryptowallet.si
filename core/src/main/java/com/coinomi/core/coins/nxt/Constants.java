@@ -83,12 +83,21 @@ public final class Constants {
     private Constants() {} // never
 
     // ARCO = json2, LANA = json3, Neva = json4 , Netko = json5,  TAJ = json6
+    //WERBUNG
+    //JSON response:
+    //[
+    // {
+    //  "imageUrl": "https://cryptowallet.si/partner/p1.png",
+    //  "link": "http://p1.cryptowallet.si"
+    // },
+    //]
     public static final String PARTNERS_URI_OVERVIEW = "https://cryptowallet.si/partner/partner1.json";
-    public static final String PARTNERS_URI_ARCO = "https://cryptowallet.si/partner/partner2.json";
-    public static final String PARTNERS_URI_LANA = "https://cryptowallet.si/partner/partner3.json";
-    public static final String PARTNERS_URI_NEVA = "https://cryptowallet.si/partner/partner4.json";
-    public static final String PARTNERS_URI_NETKO = "https://cryptowallet.si/partner/partner5.json";
-    public static final String PARTNERS_URI_TAJ = "https://cryptowallet.si/partner/partner6.json";
+    public static final String PARTNERS_URI_BTX = "https://cryptowallet.si/partner/partner2.json";
+    //public static final String PARTNERS_URI_ARCO = "https://cryptowallet.si/partner/partner2.json";
+    //public static final String PARTNERS_URI_LANA = "https://cryptowallet.si/partner/partner3.json";
+    //public static final String PARTNERS_URI_NEVA = "https://cryptowallet.si/partner/partner4.json";
+    //public static final String PARTNERS_URI_NETKO = "https://cryptowallet.si/partner/partner5.json";
+    //public static final String PARTNERS_URI_TAJ = "https://cryptowallet.si/partner/partner6.json";
 
 
 }

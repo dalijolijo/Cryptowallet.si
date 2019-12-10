@@ -23,7 +23,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="10dp"
-			tools:text="Netko - NETKO" />
+			tools:text="Bitcore - BTX" />
 
 		<ImageView
 			android:id="@+id/coinInfoIv"
@@ -31,7 +31,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="20dp"
 			android:layout_marginBottom="20dp"
-			android:src="@drawable/netko" />
+			android:src="@drawable/bitcore" />
 
 	</LinearLayout>
 

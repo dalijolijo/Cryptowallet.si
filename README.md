@@ -18,21 +18,16 @@
 
 ### Github repositories of the integrated cryptocurrencies:
 
-- https://github.com/LanaCoin/lanacoin
-- https://github.com/Taj-Coin/tajcoin
-- https://github.com/Nevacoin/nevacoin
-- https://github.com/AquariusNetwork/ARCO
-- https://github.com/NetkoCoin/netko
+- https://github.com/LIMXTEC/BitCore
+- https://github.com/LIMXTEC/BitSend
+- https://github.com/LIMXTEC/Bitcloud
+- https://github.com/LIMXTEC/Megacoin
 
 ### Privacy policy https://cryptowallet.si/privacy.html
 
 ### Electrum server source code
 
-- https://github.com/AquariusNetwork/electrum-aquariuscoin-server
-- https://github.com/LanaCoin/electrum-lanacoin-server
-- https://github.com/Taj-Coin/electrum-tajcoin-server
-- https://github.com/NetkoCoin/electrum-netko-server
-- https://github.com/Nevacoin/electrum-nevacoin-server
+- https://github.com/LIMXTEC/electrumx
 
 ### BIP39 tool for private key extraction from backup seed words
 

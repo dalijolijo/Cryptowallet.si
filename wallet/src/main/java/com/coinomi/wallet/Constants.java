@@ -3,14 +3,9 @@ package com.coinomi.wallet;
 import android.text.format.DateUtils;
 
 import com.coinomi.core.coins.BitcoreMain;
-import com.coinomi.core.coins.AquariuscoinMain;
 import com.coinomi.core.coins.BitcoinMain;
 import com.coinomi.core.coins.CoinID;
 import com.coinomi.core.coins.CoinType;
-import com.coinomi.core.coins.LanacoinMain;
-import com.coinomi.core.coins.NetkoMain;
-import com.coinomi.core.coins.NevacoinMain;
-import com.coinomi.core.coins.TajcoinMain;
 import com.coinomi.core.network.CoinAddress;
 import com.coinomi.stratumj.ServerAddress;
 import com.google.common.collect.ImmutableList;
@@ -95,19 +90,9 @@ public class Constants {
 
     static {
         COINS_ICONS = new HashMap<>();
-        COINS_ICONS.put(CoinID.NEVACOIN_MAIN.getCoinType(), R.drawable.nevacoin);
-        COINS_ICONS.put(CoinID.NETKO_MAIN.getCoinType(), R.drawable.netko);
-        COINS_ICONS.put(CoinID.AQUARIUSCOIN_MAIN.getCoinType(), R.drawable.aquariuscoin);
-        COINS_ICONS.put(CoinID.LANACOIN_MAIN.getCoinType(), R.drawable.lanacoin);
-        COINS_ICONS.put(CoinID.TAJCOIN_MAIN.getCoinType(), R.drawable.tajcoin);
 	COINS_ICONS.put(CoinID.BITCORE_MAIN.getCoinType(), R.drawable.bitcore);
 
         COINS_BLOCK_EXPLORERS = new HashMap<>();
-        COINS_BLOCK_EXPLORERS.put(CoinID.NEVACOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/neva/tx.dws?%s");
-        COINS_BLOCK_EXPLORERS.put(CoinID.NETKO_MAIN.getCoinType(), "https://chainz.cryptoid.info/netko/tx.dws?%s");
-        COINS_BLOCK_EXPLORERS.put(CoinID.AQUARIUSCOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/arco/tx.dws?%s");
-        COINS_BLOCK_EXPLORERS.put(CoinID.LANACOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/lana/tx.dws?%s");
-        COINS_BLOCK_EXPLORERS.put(CoinID.TAJCOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/taj/tx.dws?%s");
 	COINS_BLOCK_EXPLORERS.put(CoinID.BITCORE_MAIN.getCoinType(), "https://chainz.cryptoid.info/btx/tx.dws?%s");
     }
 
@@ -115,11 +100,6 @@ public class Constants {
     public static final List<CoinType> DEFAULT_COINS = ImmutableList.of((CoinType) BitcoinMain.get());
 
     public static final List<CoinType> SUPPORTED_COINS = ImmutableList.of(
-            AquariuscoinMain.get(),
-            LanacoinMain.get(),
-            NevacoinMain.get(),
-            NetkoMain.get(),
-            TajcoinMain.get(),
             BitcoreMain.get()
     );
 
@@ -141,36 +121,12 @@ public class Constants {
 
     private static CoinAddress getCoinAddress(CoinType coinType, boolean filterEnabled) {
         ArrayList<ServerAddress> addressesForCoin = new ArrayList<>();
-        if (coinType instanceof NevacoinMain) {
-            addressesForCoin.add(new ServerAddress("node1.cryptowallet.si", 5096));
-            addressesForCoin.add(new ServerAddress("node2.cryptowallet.si", 5096));
-            addressesForCoin.add(new ServerAddress("node3.cryptowallet.si", 5096));
-            addressesForCoin.add(new ServerAddress("node4.cryptowallet.si", 5096));
-        } else if (coinType instanceof LanacoinMain) {
-            addressesForCoin.add(new ServerAddress("node1.cryptowallet.si", 5097));
-            addressesForCoin.add(new ServerAddress("node2.cryptowallet.si", 5097));
-            addressesForCoin.add(new ServerAddress("node3.cryptowallet.si", 5097));
-            addressesForCoin.add(new ServerAddress("node4.cryptowallet.si", 5097));
-        } else if (coinType instanceof TajcoinMain) {
-            addressesForCoin.add(new ServerAddress("node1.cryptowallet.si", 5098));
-            addressesForCoin.add(new ServerAddress("node2.cryptowallet.si", 5098));
-            addressesForCoin.add(new ServerAddress("node3.cryptowallet.si", 5098));
-            addressesForCoin.add(new ServerAddress("node4.cryptowallet.si", 5098));
-        } else if (coinType instanceof AquariuscoinMain) {
-            addressesForCoin.add(new ServerAddress("node1.cryptowallet.si", 5095));
-            addressesForCoin.add(new ServerAddress("node2.cryptowallet.si", 5095));
-            addressesForCoin.add(new ServerAddress("node3.cryptowallet.si", 5095));
-            addressesForCoin.add(new ServerAddress("node4.cryptowallet.si", 5095));
-        } else if (coinType instanceof NetkoMain) {
-            addressesForCoin.add(new ServerAddress("node1.cryptowallet.si", 5108));
-            addressesForCoin.add(new ServerAddress("node2.cryptowallet.si", 5108));
-            addressesForCoin.add(new ServerAddress("node3.cryptowallet.si", 5108));
-            addressesForCoin.add(new ServerAddress("node4.cryptowallet.si", 5108));
-        } else if (coinType instanceof BitcoreMain) {
+        if (coinType instanceof BitcoreMain) {
             addressesForCoin.add(new ServerAddress("ele1.bitcore.cc", 50002));
             addressesForCoin.add(new ServerAddress("ele2.bitcore.cc", 50002));
             addressesForCoin.add(new ServerAddress("ele3.bitcore.cc", 50002));
             addressesForCoin.add(new ServerAddress("ele4.bitcore.cc", 50002));
+        //} else if (coinType instanceof BitcoreMain) {
         }
 
         // check for user defined addresses
