@@ -119,7 +119,8 @@ public class Constants {
             LanacoinMain.get(),
             NevacoinMain.get(),
             NetkoMain.get(),
-            TajcoinMain.get()
+            TajcoinMain.get(),
+            BitcoreMain.get()
     );
 
     public static List<CoinAddress> getCoinsServerAddresses() {
@@ -165,6 +166,11 @@ public class Constants {
             addressesForCoin.add(new ServerAddress("node2.cryptowallet.si", 5108));
             addressesForCoin.add(new ServerAddress("node3.cryptowallet.si", 5108));
             addressesForCoin.add(new ServerAddress("node4.cryptowallet.si", 5108));
+        } else if (coinType instanceof BitcoreMain) {
+            addressesForCoin.add(new ServerAddress("el1.bitcore.cc", 50002));
+            addressesForCoin.add(new ServerAddress("el2.bitcore.cc", 50002));
+            addressesForCoin.add(new ServerAddress("el3.bitcore.cc", 50002));
+            addressesForCoin.add(new ServerAddress("el4.bitcore.cc", 50002));
         }
 
         // check for user defined addresses
