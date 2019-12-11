@@ -1,8 +1,8 @@
-### Welcome to CryptoWallet.si. 
+### Welcome to X-Wallet. 
 
-### Latest .apk release is here https://github.com/CryptowalletSi/Cryptowallet.si/releases
+### Latest .apk release is here https://github.com/LIMXTEC/X-Wallet/releases
 
-### CryptoWallet.si in Google play https://play.google.com/store/apps/details?id=com.cryptowallet.si
+### X-Wallet in Google play https://play.google.com/store/apps/details?id=com.cryptowallet.si
 
 - Before sending any funds to your mobile wallet please make shure you have written the backup seed words and choosen a strong password to secure your wallet. 
 - If you loose/forget your wallet password or your mobile device get stolen/broken/hacked/damaged and you dont have your recovery seed we cant help you. 

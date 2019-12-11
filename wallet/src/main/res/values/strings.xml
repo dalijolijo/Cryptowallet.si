@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">CryptoWallet.si</string>
+    <string name="app_name" translatable="false">X-Wallet</string>
     <string name="app_package" translatable="false">com.cryptowallet.si</string>
     <string name="crypowalletsi_website" translatable="false">https://coinomi.com</string>
     <string name="almost_equal_to" translatable="false">≈</string>
@@ -76,7 +76,7 @@
     <string name="trade">Exchange</string>
     <string name="receive">Receive</string>
     <!-- Welcome fragment -->
-    <string name="welcome_text">Welcome to CryptoWallet.si wallet</string>
+    <string name="welcome_text">Welcome to X-Wallet wallet</string>
     <string name="create_wallet">Create a new wallet</string>
     <string name="restore_wallet">Restore a wallet</string>
     <string name="test_wallet">Test wallet</string>
@@ -105,7 +105,7 @@
     <!-- Wallet activity -->
     <string name="test_wallet_message">This is a test wallet, where you can send and receive testnet Bitcoins, Litecoin and Dogecoins.\n\nIf you want to use the wallet with real money please go to: <b>Settings &gt; Restore wallet &gt; Create a new wallet</b>.</string>
     <string name="wallet_update_title">New version available</string>
-    <string name="wallet_update_message">A new version of CryptoWallet.si is available, it contains new features and fixes.</string>
+    <string name="wallet_update_message">A new version of X-Wallet is available, it contains new features and fixes.</string>
     <string name="pay_with">Send with</string>
     <string name="exchange_and_pay_title">Exchange and send</string>
     <!-- PayToDialog-->
@@ -201,8 +201,8 @@
         <item quantity="other">%d seconds</item>
     </plurals>
     <!-- About Activity -->
-    <string name="title_activity_about">About CryptoWallet.si</string>
-    <string name="app_name_long">CryptoWallet.si for Android</string>
+    <string name="title_activity_about">About X-Wallet</string>
+    <string name="app_name_long">X-Wallet for Android</string>
     <string name="about_licence">An open source project\nhttps://github.com/Coinomi/coinomi-android</string>
     <string name="about_credits_nubits">Server infrastructure donated by NuBits - The World\'s First Stable Digital Currency\nhttps://nubits.com/</string>
     <string name="about_credits_translations">Translations provided by:</string>
@@ -215,7 +215,7 @@
     <string name="about_credits_font_icons">Font-icons by Daniel Bruce\nhttp://www.entypo.com</string>
     <string name="about_credits_exchange_rates">Exchange rates provided by\nhttp://www.cryptocoincharts.info/\nhttps://bitcoinaverage.com/</string>
     <!--TODO: maybe replace year with calendar current year -->
-    <string name="about_cryptowalletsi_copyright" translatable="false">\u00A9 2018 CryptoWallet.si</string>
+    <string name="about_cryptowalletsi_copyright" translatable="false">\u00A9 2018 X-Wallet</string>
     <!-- Add Coins -->
     <string name="title_activity_add_coins">Add coins</string>
     <!-- %1$s is the coin name e.g. ... create a Bitcoin account ... -->
@@ -368,11 +368,11 @@
     <string name="account_extended_private_key_label">Extended private key</string>
     <string name="account_private_key_warning">The private key allows you to send coins from this account. It is not necessary to backup this key as it is derived from your <i>recovery phrase</i></string>
     <!-- Support -->
-    <string name="support_message">Contact CryptoWallet.si support</string>
+    <string name="support_message">Contact X-Wallet support</string>
     <!-- Sweep wallet -->
     <!-- Sweep paper wallet means to redeem coins from a code usually printed on a paper -->
     <string name="title_activity_sweep_wallet">Sweep paper wallet</string>
-    <string name="sweep_wallet_info">You are about to transfer coins from a paper wallet to your CryptoWallet.si wallet.\nAfter the transfer is complete, please avoid reusing the paper wallet for security reasons.\n\nSupported formats: WIF, BIP38, Mini private key.</string>
+    <string name="sweep_wallet_info">You are about to transfer coins from a paper wallet to your X-Wallet wallet.\nAfter the transfer is complete, please avoid reusing the paper wallet for security reasons.\n\nSupported formats: WIF, BIP38, Mini private key.</string>
     <string name="sweep_wallet_key_title">Private key</string>
     <string name="sweep_wallet_key_password">Private key password</string>
     <string name="sweep_wallet_key_hint">type or scan a private key</string>
@@ -403,9 +403,9 @@
     <string name="terms_of_service" translatable="false">LEGAL DISCLAIMER\n
 \n
 \n
-1. Risks related to the use of CryptoWallet.si Wallet\n
+1. Risks related to the use of X-Wallet Wallet\n
 \n
-CryptoWallet.si will not be responsible for any losses, damages or claims arising from events falling within the scope of the following five categories:\n
+X-Wallet will not be responsible for any losses, damages or claims arising from events falling within the scope of the following five categories:\n
 \n
 (1) Mistakes made by the user of any cryptocurrency-related software or service, e.g., forgotten passwords, payments sent to wrong coin addresses, and accidental deletion of wallets.\n
 \n

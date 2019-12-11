@@ -83,7 +83,7 @@ public class Constants {
     public static final char CURRENCY_MINUS_SIGN = '-';
 
     public static final String MARKET_APP_URL = "market://details?id=%s";
-    public static final String BINARY_URL = "https://github.com/LIMXTEC/cryptowallet.si/releases";
+    public static final String BINARY_URL = "https://github.com/LIMXTEC/x-wallet/releases";
 
     public static final String VERSION_URL = "https://cryptowallet.si/version";
     public static final String SUPPORT_EMAIL = "support@cryptowallet.si";
