@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">X-Wallet</string>
-    <string name="app_package" translatable="false">com.cryptowallet.si</string>
-    <string name="crypowalletsi_website" translatable="false">https://coinomi.com</string>
+    <string name="app_package" translatable="false">com.coinomi</string>
+    <string name="limxtec_website" translatable="false">https://limxtec.org</string>
     <string name="almost_equal_to" translatable="false">≈</string>
     <string name="action_scan_qr_code">Scan</string>
     <string name="action_share">Share</string>
@@ -76,7 +76,7 @@
     <string name="trade">Exchange</string>
     <string name="receive">Receive</string>
     <!-- Welcome fragment -->
-    <string name="welcome_text">Welcome to X-Wallet wallet</string>
+    <string name="welcome_text">Welcome to X-Wallet</string>
     <string name="create_wallet">Create a new wallet</string>
     <string name="restore_wallet">Restore a wallet</string>
     <string name="test_wallet">Test wallet</string>
@@ -85,7 +85,7 @@
     <string name="override_new_wallet_warning_message">If you create a new wallet, your existing wallet will be lost unless you backed up you <i>recovery phrase</i>.</string>
     <string name="override_restore_wallet_warning_message">If you restore a wallet, your existing wallet will be lost unless you backed up you <i>recovery phrase</i>.</string>
     <string name="incompatible_device_warning_title">Incompatible device</string>
-    <string name="incompatible_device_warning_message">This device cannot perform certain cryptographic functions due to software or hardware bugs.\nThis could be solved with an update from the device manufacturer.\n\nContact us if you have any questions: support@cryptowallet.si</string>
+    <string name="incompatible_device_warning_message">This device cannot perform certain cryptographic functions due to software or hardware bugs.\nThis could be solved with an update from the device manufacturer.\n\nContact us if you have any questions: info@bitcore.cc</string>
     <!-- Recovery fragment -->
     <string name="seed_info">This is your <i>recovery phrase</i>, which is used to generate the keys for your wallet. Please write it down on a paper and keep it in a secure place, as you would with paper money. Anyone with access to it has access to the wallet\'s funds.\nIf you lose your recovery phrase, your wallet cannot be recovered.</string>
     <string name="seed_title">Your recovery phrase</string>
@@ -215,7 +215,7 @@
     <string name="about_credits_font_icons">Font-icons by Daniel Bruce\nhttp://www.entypo.com</string>
     <string name="about_credits_exchange_rates">Exchange rates provided by\nhttp://www.cryptocoincharts.info/\nhttps://bitcoinaverage.com/</string>
     <!--TODO: maybe replace year with calendar current year -->
-    <string name="about_cryptowalletsi_copyright" translatable="false">\u00A9 2018 X-Wallet</string>
+    <string name="about_limxtec_copyright" translatable="false">\u00A9 2018 LIMXTEC</string>
     <!-- Add Coins -->
     <string name="title_activity_add_coins">Add coins</string>
     <!-- %1$s is the coin name e.g. ... create a Bitcoin account ... -->
@@ -368,7 +368,7 @@
     <string name="account_extended_private_key_label">Extended private key</string>
     <string name="account_private_key_warning">The private key allows you to send coins from this account. It is not necessary to backup this key as it is derived from your <i>recovery phrase</i></string>
     <!-- Support -->
-    <string name="support_message">Contact X-Wallet support</string>
+    <string name="support_message">Contact LIMXTEC support</string>
     <!-- Sweep wallet -->
     <!-- Sweep paper wallet means to redeem coins from a code usually printed on a paper -->
     <string name="title_activity_sweep_wallet">Sweep paper wallet</string>
@@ -405,7 +405,7 @@
 \n
 1. Risks related to the use of X-Wallet Wallet\n
 \n
-X-Wallet will not be responsible for any losses, damages or claims arising from events falling within the scope of the following five categories:\n
+LIMXTEC will not be responsible for any losses, damages or claims arising from events falling within the scope of the following five categories:\n
 \n
 (1) Mistakes made by the user of any cryptocurrency-related software or service, e.g., forgotten passwords, payments sent to wrong coin addresses, and accidental deletion of wallets.\n
 \n
@@ -450,13 +450,12 @@ The user of the wallet agrees to arbitrate any dispute arising from or in connec
 \n
 8. Last amendment\n
 \n
-This disclaimer was amended for the last time on January 1st, 2016.</string>
+This disclaimer was amended for the last time on January 1st, 2020.</string>
 
     <string name="contact_us_support">Contact support:</string>
-    <string name="contact_us_email">Email: \nsupport@cryptowallet.si</string>
+    <string name="contact_us_email">Email: \ninfo@bitcore.cc</string>
     <string name="contact_us_telegram_support">Telegram support:</string>
     <string name="contact_us_btx_coin">Bitcore BTX: \nhttps://t.me/bitcore_cc</string>
-    <string name="contact_us_ticket_portal">Ticket portal : \nhttp://support.cryptowallet.si</string>
     <string name="send_amount_balance">Balance: %s</string>
 
     <string name="menu_option_connections">Connections</string>

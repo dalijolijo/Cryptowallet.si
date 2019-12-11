@@ -1,8 +1,8 @@
 ### Welcome to X-Wallet. 
 
-### Latest .apk release is here https://github.com/LIMXTEC/X-Wallet/releases
+### Latest .apk release is here https://github.com/LIMXTEC/X-Wallet/releases TODO
 
-### X-Wallet in Google play https://play.google.com/store/apps/details?id=com.cryptowallet.si
+### X-Wallet in Google play https://play.google.com/store/apps/details?id=com.x-wallet TODO
 
 - Before sending any funds to your mobile wallet please make shure you have written the backup seed words and choosen a strong password to secure your wallet. 
 - If you loose/forget your wallet password or your mobile device get stolen/broken/hacked/damaged and you dont have your recovery seed we cant help you. 
@@ -12,7 +12,7 @@
 - We dont have access to your coins, your seed backup or your private keys. 
 - Private keys can be retrieved from the backup seed (again write it down andstore it to a safe place). 
 
-### For support join our Telegram group https://t.me/joinchat/D32pHEojbV2orJhc0wBp8A
+### For support join our Bitcore Telegram group https://t.me/bitcore_cc 
 
 ### Responsibility of the security of your mobile device is yours alone.
 
@@ -23,7 +23,7 @@
 - https://github.com/LIMXTEC/Bitcloud
 - https://github.com/LIMXTEC/Megacoin
 
-### Privacy policy https://cryptowallet.si/privacy.html
+### Privacy policy https://github.com/LIMXTEC/X-Wallet/privacy.html
 
 ### Electrum server source code
 
@@ -31,6 +31,4 @@
 
 ### BIP39 tool for private key extraction from backup seed words
 
-- https://github.com/CryptowalletSi/bip39
-
-- https://github.com/CryptowalletSi/bip39/archive/master.zip
+- https://github.com/CryptowalletSi/bip39 TODO: clone?

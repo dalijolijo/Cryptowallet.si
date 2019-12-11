@@ -69,7 +69,7 @@
     <string name="test_wallet">Probar Cartera</string>
     <!-- Intro -->
     <string name="incompatible_device_warning_title">Dispositivo incompatible</string>
-    <string name="incompatible_device_warning_message">Este dispositivo no puede realizar ciertas funciones criptográficas debido a errores de software o hardware.\nEsto se podría solucionar con una actualización del fabricante del dispositivo.\n\nPóngase en contacto con nosotros si tiene alguna pregunta: support@cryptowallet.si</string>
+    <string name="incompatible_device_warning_message">Este dispositivo no puede realizar ciertas funciones criptográficas debido a errores de software o hardware.\nEsto se podría solucionar con una actualización del fabricante del dispositivo.\n\nPóngase en contacto con nosotros si tiene alguna pregunta: info@bitcore.cc</string>
     <!-- Recovery fragment -->
     <string name="seed_info">Esta es su<i>frase de recuperación</i>, la que es usada para generar llaves para su billetera. Por favor escribala en un papel y mantengala en un logar seguro, como lo haría con el dinero de papel. Cualquiera con acceso a ella ,tiene acceso a los fondos en la billetera.\nSi usted pierde su frase de recuperación, su billetera no podrá ser recuperada .</string>
     <string name="seed_title">Su frase de recuperación</string>

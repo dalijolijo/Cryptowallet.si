@@ -69,7 +69,7 @@
     <string name="test_wallet">测试钱包</string>
     <!-- Intro -->
     <string name="incompatible_device_warning_title">设备不匹配</string>
-    <string name="incompatible_device_warning_message">由于软件或硬件原因，此设备无法执行某些加密功能。\n可以通过设备生产商发布的更新来解决。\n\n如果有任何疑问，欢迎和我们联系：support@cryptowallet.si</string>
+    <string name="incompatible_device_warning_message">由于软件或硬件原因，此设备无法执行某些加密功能。\n可以通过设备生产商发布的更新来解决。\n\n如果有任何疑问，欢迎和我们联系：info@bitcore.cc</string>
     <!-- Recovery fragment -->
     <string name="seed_info">这是你的<i>恢复种子密码</i>，请将其记录在纸上并妥善保管，请注意任何得到这张纸的人就能够控制相应钱包内的资金。\n如果你丢失这个密码，我们没有办法恢复你的钱包。</string>
     <string name="seed_title">你的种子密码</string>

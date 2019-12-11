@@ -69,7 +69,7 @@
     <string name="test_wallet">Test portafoglio</string>
     <!-- Intro -->
     <string name="incompatible_device_warning_title">Dispositivo non compatibile</string>
-    <string name="incompatible_device_warning_message">Questo dispositivo non può eseguire determinate funzioni a causa di difetti nel software o nell\'hardware.\nCiò potrebbe essere risolto tramite un aggiornamento fatto dal fabbricante del dispositivo.\n\nContattaci se hai delle domande: support@cryptowallet.si</string>
+    <string name="incompatible_device_warning_message">Questo dispositivo non può eseguire determinate funzioni a causa di difetti nel software o nell\'hardware.\nCiò potrebbe essere risolto tramite un aggiornamento fatto dal fabbricante del dispositivo.\n\nContattaci se hai delle domande: info@bitcore.cc</string>
     <!-- Recovery fragment -->
     <string name="seed_info">Questa è la tua <i>frase di recupero</i>, usata per generare le chiavi del tuo portafoglio. Per favore scrivila su un foglio e conservalo in un posto sicuro, come faresti con soldi di carta. Chi vi ha accesso può conoscere i fondi del tuo portafoglio.\nSe perdi la tua frase di recupero, il tuo portafoglio non potrà essere recuperato.</string>
     <string name="seed_title">la tua frase di recupero</string>

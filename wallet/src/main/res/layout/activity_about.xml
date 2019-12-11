@@ -149,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:paddingTop="30dp"
-            android:text="@string/about_cryptowalletsi_copyright" />
+            android:text="@string/about_limxtec_copyright" />
 
     </LinearLayout>
 </ScrollView>
