@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:238859439125:android:dea90edb82c4e82c",
         "android_client_info": {
-          "package_name": "com.coinomi.wallet"
+          "package_name": "com.x.wallet"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "238859439125-ps9sc9d73kchrgbo0006t0kaibjpdnar.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.coinomi.wallet",
+            "package_name": "com.x.wallet",
             "certificate_hash": "f28dc8c315c2102345fde8a5ac99eeefd1f9dccb"
           }
         },

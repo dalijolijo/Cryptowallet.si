@@ -11,7 +11,7 @@ android {
     buildToolsVersion rootProject.ext.build_tools
 
     defaultConfig {
-        applicationId "com.coinomi.wallet"
+        applicationId "com.x.wallet"
         minSdkVersion rootProject.ext.min_sdk
         targetSdkVersion rootProject.ext.target_sdk
         versionCode 7

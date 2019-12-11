@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">X-Wallet</string>
-    <string name="app_package" translatable="false">com.coinomi</string>
+    <string name="app_package" translatable="false">com.x.wallet</string>
     <string name="limxtec_website" translatable="false">https://limxtec.org</string>
     <string name="almost_equal_to" translatable="false">≈</string>
     <string name="action_scan_qr_code">Scan</string>
