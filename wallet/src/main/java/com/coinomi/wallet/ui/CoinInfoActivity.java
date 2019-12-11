@@ -12,6 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coinomi.core.coins.BitcoreMain;
+import com.coinomi.core.coins.BitsendMain;
+import com.coinomi.core.coins.BitcloudMain;
+import com.coinomi.core.coins.MegacoinMain;
 import com.coinomi.core.coins.CoinType;
 import com.coinomi.core.wallet.WalletAccount;
 import com.coinomi.wallet.Constants;
@@ -61,7 +64,12 @@ public class CoinInfoActivity extends BaseWalletActivity {
         int stringArrayId = -1;
         if (coinType instanceof BitcoreMain) {
             stringArrayId = R.array.btx_coin;
-        //} else if (coinType instanceof BitsendMain) {
+        } else if (coinType instanceof BitsendMain) {
+            stringArrayId = R.array.bsd_coin;
+        } else if (coinType instanceof BitcloudMain) {
+            stringArrayId = R.array.btdx_coin;
+        } else if (coinType instanceof MegacoinMain) {
+            stringArrayId = R.array.mec_coin;
         }
         addLinks(stringArrayId);
     }

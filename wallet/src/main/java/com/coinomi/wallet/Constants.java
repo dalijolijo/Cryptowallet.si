@@ -4,6 +4,9 @@ import android.text.format.DateUtils;
 
 import com.coinomi.core.coins.BitcoreMain;
 import com.coinomi.core.coins.BitcoinMain;
+import com.coinomi.core.coins.BitsendMain;
+import com.coinomi.core.coins.BitcloudMain;
+import com.coinomi.core.coins.MegacoinMain;
 import com.coinomi.core.coins.CoinID;
 import com.coinomi.core.coins.CoinType;
 import com.coinomi.core.network.CoinAddress;
@@ -80,7 +83,7 @@ public class Constants {
     public static final char CURRENCY_MINUS_SIGN = '-';
 
     public static final String MARKET_APP_URL = "market://details?id=%s";
-    public static final String BINARY_URL = "https://github.com/CryptowalletSi/Cryptowallet.si/releases";
+    public static final String BINARY_URL = "https://github.com/LIMXTEC/cryptowallet.si/releases";
 
     public static final String VERSION_URL = "https://cryptowallet.si/version";
     public static final String SUPPORT_EMAIL = "support@cryptowallet.si";
@@ -90,17 +93,27 @@ public class Constants {
 
     static {
         COINS_ICONS = new HashMap<>();
-	COINS_ICONS.put(CoinID.BITCORE_MAIN.getCoinType(), R.drawable.bitcore);
+        COINS_ICONS.put(CoinID.BITCORE_MAIN.getCoinType(), R.drawable.bitcore);
+        COINS_ICONS.put(CoinID.BITSEND_MAIN.getCoinType(), R.drawable.bitsend);
+        COINS_ICONS.put(CoinID.BITCLOUD_MAIN.getCoinType(), R.drawable.bitcloud);
+        COINS_ICONS.put(CoinID.MEGACOIN_MAIN.getCoinType(), R.drawable.megacoin);
 
         COINS_BLOCK_EXPLORERS = new HashMap<>();
 	COINS_BLOCK_EXPLORERS.put(CoinID.BITCORE_MAIN.getCoinType(), "https://chainz.cryptoid.info/btx/tx.dws?%s");
+        COINS_BLOCK_EXPLORERS.put(CoinID.BITSEND_MAIN.getCoinType(), "https://chainz.cryptoid.info/bsd/tx.dws?%s");
+        COINS_BLOCK_EXPLORERS.put(CoinID.BITCLOUD_MAIN.getCoinType(), "https://chainz.cryptoid.info/btdx/tx.dws?%s");
+        COINS_BLOCK_EXPLORERS.put(CoinID.MEGACOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/mec/tx.dws?%s");
     }
 
     public static final CoinType DEFAULT_COIN = BitcoinMain.get();
     public static final List<CoinType> DEFAULT_COINS = ImmutableList.of((CoinType) BitcoinMain.get());
 
+    //TODO: deactivate coins which not support electrumX yet
     public static final List<CoinType> SUPPORTED_COINS = ImmutableList.of(
-            BitcoreMain.get()
+            BitcoreMain.get(),
+            BitsendMain.get(),
+            BitcloudMain.get(),
+            MegacoinMain.get()
     );
 
     public static List<CoinAddress> getCoinsServerAddresses() {
@@ -126,7 +139,12 @@ public class Constants {
             addressesForCoin.add(new ServerAddress("ele2.bitcore.cc", 50002));
             addressesForCoin.add(new ServerAddress("ele3.bitcore.cc", 50002));
             addressesForCoin.add(new ServerAddress("ele4.bitcore.cc", 50002));
-        //} else if (coinType instanceof BitcoreMain) {
+        } else if (coinType instanceof BitsendMain) {
+            addressesForCoin.add(new ServerAddress("ele1.bitsend.info", 50002));
+        } else if (coinType instanceof BitcloudMain) {
+            addressesForCoin.add(new ServerAddress("ele1.bit-cloud.info", 50002));
+        } else if (coinType instanceof MegacoinMain) {
+            addressesForCoin.add(new ServerAddress("ele1.megacoin.eu", 50002));
         }
 
         // check for user defined addresses

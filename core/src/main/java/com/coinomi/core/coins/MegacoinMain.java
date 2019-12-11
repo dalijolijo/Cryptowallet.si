@@ -5,30 +5,30 @@ import com.coinomi.core.coins.families.BitFamily;
 /**
  * @author dalijolijo
  */
-public class BitcoreMain extends BitFamily {
-    private BitcoreMain() {
-        id = "bitcore.main";
+public class MegacoinMain extends BitFamily {
+    private MegacoinMain() {
+        id = "megacoin.main";
 
-        addressHeader = 3;
-        p2shHeader = 125;
+        addressHeader = 50;
+        p2shHeader = 5;
         acceptableAddressCodes = new int[] { addressHeader, p2shHeader };
         spendableCoinbaseDepth = 100;
         dumpedPrivateKeyHeader = 128;
 
-        name = "Bitcore";
-        symbol = "BTX";
-        uriScheme = "bitcore";
-        bip44Index = 160;
+        name = "Megacoin";
+        symbol = "MEC";
+        uriScheme = "megacoin";
+        bip44Index = 217;
         unitExponent = 8;
         feeValue = value(100000);
-        minNonDust = value(1000); // 0.00001 BTX mininput
+        minNonDust = value(1000); // 0.00001 MEC mininput
         //softDustLimit = value(100000); // 0.001 LTC
-        softDustLimit = value(55000); // 0.00055 BTX
+        softDustLimit = value(100000); //  0.001 MEC
         softDustPolicy = SoftDustPolicy.BASE_FEE_FOR_EACH_SOFT_DUST_TXO;
-        signedMessageHeader = toBytes("BitCore Signed Message:\n");
+        signedMessageHeader = toBytes("MegaCoin Signed Message:\n");
     }
 
-    private static BitcoreMain instance = new BitcoreMain();
+    private static MegacoinMain instance = new MegacoinMain();
     public static synchronized CoinType get() {
         return instance;
     }
