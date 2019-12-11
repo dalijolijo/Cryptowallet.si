@@ -11,9 +11,54 @@
 		<item>CoinmarketCap: https://coinmarketcap.com/currencies/bitcore</item>
 		<item>Coinpaprika: https://coinpaprika.com/coin/btx-bitcore</item>
 		<item>CoinGecko: https://www.coingecko.com/en/coins/bitcore</item>
-		<item>Blockexplorer: https://chainz.cryptoid.info/btx/</item>
+		<item>Blockexplorer: https://chainz.cryptoid.info/btx</item>
 		<item>Instagram: https://www.instagram.com/bitcore.btx</item>
 		<item>Reddit: https://www.reddit.com/r/bitcore_btx</item>
 	</string-array>
+
+        <string-array name="bsd_coin">
+                <item>Website: https://bitsend.info</item>
+                <item>Forum: https://bitcointalk.org/index.php?topic=1370307.0</item>
+                <item>Twitter: https://twitter.com/Bitcore_BTX</item>
+                <item>Facebook: https://facebook.com/groups/Bitcore.BTX</item>
+                <item>Telegram Main English: https://t.me/bitcore_cc</item>
+                <item>Telegram News: https://t.me/bitcore_cc</item>
+                <item>CoinmarketCap: https://coinmarketcap.com/currencies/bitcore</item>
+                <item>Coinpaprika: https://coinpaprika.com/coin/btx-bitcore</item>
+                <item>CoinGecko: https://www.coingecko.com/en/coins/bitcore</item>
+                <item>Blockexplorer: https://chainz.cryptoid.info/btx/</item>
+                <item>Instagram: https://www.instagram.com/bitcore.btx</item>
+                <item>Reddit: https://www.reddit.com/r/bitcore_btx</item>
+        </string-array>
+
+        <string-array name="btdx_coin">
+                <item>Website: https://bitcore.cc</item>
+                <item>Forum: https://bitcointalk.org/index.php?topic=1883902.0</item>
+                <item>Twitter: https://twitter.com/Bitcore_BTX</item>
+                <item>Facebook: https://facebook.com/groups/Bitcore.BTX</item>
+                <item>Telegram Main English: https://t.me/bitcore_cc</item>
+                <item>Telegram News: https://t.me/bitcore_cc</item>
+                <item>CoinmarketCap: https://coinmarketcap.com/currencies/bitcore</item>
+                <item>Coinpaprika: https://coinpaprika.com/coin/btx-bitcore</item>
+                <item>CoinGecko: https://www.coingecko.com/en/coins/bitcore</item>
+                <item>Blockexplorer: https://chainz.cryptoid.info/btx/</item>
+                <item>Instagram: https://www.instagram.com/bitcore.btx</item>
+                <item>Reddit: https://www.reddit.com/r/bitcore_btx</item>
+        </string-array>
+
+        <string-array name="mec_coin">
+                <item>Website: https://bitcore.cc</item>
+                <item>Forum: https://bitcointalk.org/index.php?topic=1883902.0</item>
+                <item>Twitter: https://twitter.com/Bitcore_BTX</item>
+                <item>Facebook: https://facebook.com/groups/Bitcore.BTX</item>
+                <item>Telegram Main English: https://t.me/bitcore_cc</item>
+                <item>Telegram News: https://t.me/bitcore_cc</item>
+                <item>CoinmarketCap: https://coinmarketcap.com/currencies/bitcore</item>
+                <item>Coinpaprika: https://coinpaprika.com/coin/btx-bitcore</item>
+                <item>CoinGecko: https://www.coingecko.com/en/coins/bitcore</item>
+                <item>Blockexplorer: https://chainz.cryptoid.info/btx/</item>
+                <item>Instagram: https://www.instagram.com/bitcore.btx</item>
+                <item>Reddit: https://www.reddit.com/r/bitcore_btx</item>
+        </string-array>
 
 </resources>
