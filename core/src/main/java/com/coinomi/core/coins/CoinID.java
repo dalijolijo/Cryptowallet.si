@@ -22,6 +22,7 @@ import java.util.Set;
  * @author John L. Jegutanis
  */
 public enum CoinID {
+    BITCOIN_MAIN(BitcoinMain.get()),
     BITCORE_MAIN(BitcoreMain.get()),
     BITSEND_MAIN(BitsendMain.get()),
     BITCLOUD_MAIN(BitcloudMain.get()),

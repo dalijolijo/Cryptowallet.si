@@ -2,8 +2,8 @@ package com.coinomi.wallet;
 
 import android.text.format.DateUtils;
 
-import com.coinomi.core.coins.BitcoreMain;
 import com.coinomi.core.coins.BitcoinMain;
+import com.coinomi.core.coins.BitcoreMain;
 import com.coinomi.core.coins.BitsendMain;
 import com.coinomi.core.coins.BitcloudMain;
 import com.coinomi.core.coins.MegacoinMain;
@@ -93,12 +93,14 @@ public class Constants {
 
     static {
         COINS_ICONS = new HashMap<>();
+        COINS_ICONS.put(CoinID.BITCOIN_MAIN.getCoinType(), R.drawable.bitcoin);
         COINS_ICONS.put(CoinID.BITCORE_MAIN.getCoinType(), R.drawable.bitcore);
         COINS_ICONS.put(CoinID.BITSEND_MAIN.getCoinType(), R.drawable.bitsend);
         COINS_ICONS.put(CoinID.BITCLOUD_MAIN.getCoinType(), R.drawable.bitcloud);
         COINS_ICONS.put(CoinID.MEGACOIN_MAIN.getCoinType(), R.drawable.megacoin);
 
         COINS_BLOCK_EXPLORERS = new HashMap<>();
+        COINS_BLOCK_EXPLORERS.put(CoinID.BITCOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/btc/tx.dws?%s");
 	COINS_BLOCK_EXPLORERS.put(CoinID.BITCORE_MAIN.getCoinType(), "https://chainz.cryptoid.info/btx/tx.dws?%s");
         COINS_BLOCK_EXPLORERS.put(CoinID.BITSEND_MAIN.getCoinType(), "https://chainz.cryptoid.info/bsd/tx.dws?%s");
         COINS_BLOCK_EXPLORERS.put(CoinID.BITCLOUD_MAIN.getCoinType(), "https://chainz.cryptoid.info/btdx/tx.dws?%s");
@@ -110,6 +112,7 @@ public class Constants {
 
     //TODO: deactivate coins which not support electrumX yet
     public static final List<CoinType> SUPPORTED_COINS = ImmutableList.of(
+            BitcoinMain.get(),
             BitcoreMain.get(),
             BitsendMain.get(),
             BitcloudMain.get(),
@@ -134,7 +137,12 @@ public class Constants {
 
     private static CoinAddress getCoinAddress(CoinType coinType, boolean filterEnabled) {
         ArrayList<ServerAddress> addressesForCoin = new ArrayList<>();
-        if (coinType instanceof BitcoreMain) {
+        if (coinType instanceof BitcoinMain) {
+            addressesForCoin.add(new ServerAddress("ndnd.selfhost.eu", 50002));
+            addressesForCoin.add(new ServerAddress("node.arianc.com", 50002));
+            addressesForCoin.add(new ServerAddress("helicarrier.bauerj.eu", 50002));
+        } else if (coinType instanceof BitcoreMain) {
+            addressesForCoin.add(new ServerAddress("ele1.bitcore.cc", 50002));
             addressesForCoin.add(new ServerAddress("ele1.bitcore.cc", 50002));
             addressesForCoin.add(new ServerAddress("ele2.bitcore.cc", 50002));
             addressesForCoin.add(new ServerAddress("ele3.bitcore.cc", 50002));
