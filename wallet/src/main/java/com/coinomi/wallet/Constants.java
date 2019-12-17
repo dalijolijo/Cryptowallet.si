@@ -112,7 +112,7 @@ public class Constants {
 
     //TODO: deactivate coins which not support electrumX yet
     public static final List<CoinType> SUPPORTED_COINS = ImmutableList.of(
-            BitcoinMain.get(),
+            //BitcoinMain.get(),
             BitcoreMain.get(),
             BitsendMain.get(),
             BitcloudMain.get(),
