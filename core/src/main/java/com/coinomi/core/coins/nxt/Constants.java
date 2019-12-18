@@ -92,9 +92,9 @@ public final class Constants {
     // },
     //]
     public static final String PARTNERS_URI_OVERVIEW = "http://9e98d434-ec06-49d3-8dba-041726e407a8.pub.cloud.scaleway.com:8080/limxtec";
-    public static final String PARTNERS_URI_BTX = "https://9e98d434-ec06-49d3-8dba-041726e407a8.pub.cloud.scaleway.com:8080/btx";
-    public static final String PARTNERS_URI_BSD = "https://9e98d434-ec06-49d3-8dba-041726e407a8.pub.cloud.scaleway.com:8080/bsd";
-    public static final String PARTNERS_URI_BTDX = "https://9e98d434-ec06-49d3-8dba-041726e407a8.pub.cloud.scaleway.com:8080/btdx";
-    public static final String PARTNERS_URI_MEC = "https://9e98d434-ec06-49d3-8dba-041726e407a8.pub.cloud.scaleway.com:8080/mec";
+    public static final String PARTNERS_URI_BTX = "http://9e98d434-ec06-49d3-8dba-041726e407a8.pub.cloud.scaleway.com:8080/btx";
+    public static final String PARTNERS_URI_BSD = "http://9e98d434-ec06-49d3-8dba-041726e407a8.pub.cloud.scaleway.com:8080/bsd";
+    public static final String PARTNERS_URI_BTDX = "http://9e98d434-ec06-49d3-8dba-041726e407a8.pub.cloud.scaleway.com:8080/btdx";
+    public static final String PARTNERS_URI_MEC = "http://9e98d434-ec06-49d3-8dba-041726e407a8.pub.cloud.scaleway.com:8080/mec";
 }
 
