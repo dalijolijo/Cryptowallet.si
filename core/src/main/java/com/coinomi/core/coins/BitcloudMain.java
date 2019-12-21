@@ -1,11 +1,13 @@
 package com.coinomi.core.coins;
 
 import com.coinomi.core.coins.families.BitFamily;
+import com.coinomi.core.PartnersInfoData;
+import com.coinomi.core.coins.nxt.Constants;
 
 /**
  * @author dalijolijo
  */
-public class BitcloudMain extends BitFamily {
+public class BitcloudMain extends BitFamily implements PartnersInfoData {
     private BitcloudMain() {
         id = "bitcloud.main";
 
@@ -31,5 +33,9 @@ public class BitcloudMain extends BitFamily {
     private static BitcloudMain instance = new BitcloudMain();
     public static synchronized CoinType get() {
         return instance;
+    }
+    @Override
+    public String getPartnerUrl() {
+        return Constants.PARTNERS_URI_MEC;
     }
 }

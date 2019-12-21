@@ -1,11 +1,13 @@
 package com.coinomi.core.coins;
 
 import com.coinomi.core.coins.families.BitFamily;
+import com.coinomi.core.PartnersInfoData;
+import com.coinomi.core.coins.nxt.Constants;
 
 /**
  * @author dalijolijo
  */
-public class BitcoreMain extends BitFamily {
+public class BitcoreMain extends BitFamily implements PartnersInfoData {
     private BitcoreMain() {
         id = "bitcore.main";
 
@@ -31,5 +33,10 @@ public class BitcoreMain extends BitFamily {
     private static BitcoreMain instance = new BitcoreMain();
     public static synchronized CoinType get() {
         return instance;
+    }
+
+    @Override
+    public String getPartnerUrl() {
+        return Constants.PARTNERS_URI_BTX;
     }
 }

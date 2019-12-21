@@ -1,11 +1,13 @@
 package com.coinomi.core.coins;
 
 import com.coinomi.core.coins.families.BitFamily;
+import com.coinomi.core.PartnersInfoData;
+import com.coinomi.core.coins.nxt.Constants;
 
 /**
  * @author dalijolijo
  */
-public class MegacoinMain extends BitFamily {
+public class MegacoinMain extends BitFamily implements PartnersInfoData {
     private MegacoinMain() {
         id = "megacoin.main";
 
@@ -31,5 +33,9 @@ public class MegacoinMain extends BitFamily {
     private static MegacoinMain instance = new MegacoinMain();
     public static synchronized CoinType get() {
         return instance;
+    }
+    @Override
+    public String getPartnerUrl() {
+        return Constants.PARTNERS_URI_MEC;
     }
 }
