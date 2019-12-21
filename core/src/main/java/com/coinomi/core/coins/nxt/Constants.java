@@ -91,10 +91,10 @@ public final class Constants {
     //  "link": "http://p1.cryptowallet.si"
     // },
     //]
-    public static final String PARTNERS_URI_OVERVIEW = "https://cryptowallet.si/partner/partner1.json";
-    public static final String PARTNERS_URI_BTX = "https://cryptowallet.si/partner/partner2.json";
-    public static final String PARTNERS_URI_BSD = "https://cryptowallet.si/partner/partner3.json";
-    public static final String PARTNERS_URI_BTDX = "https://cryptowallet.si/partner/partner4.json";
-    public static final String PARTNERS_URI_MEC = "https://cryptowallet.si/partner/partner5.json";
+    public static final String PARTNERS_URI_OVERVIEW = "https://51.158.182.210/partner1.json";
+    public static final String PARTNERS_URI_BTX = "https://51.158.182.210/partner2.json";
+    public static final String PARTNERS_URI_BSD = "https://51.158.182.210/partner3.json";
+    public static final String PARTNERS_URI_BTDX = "https://51.158.182.210/partner4.json";
+    public static final String PARTNERS_URI_MEC = "https://51.158.182.210/partner5.json";
 }
 
