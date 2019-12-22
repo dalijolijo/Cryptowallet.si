@@ -140,7 +140,7 @@ public class Constants {
             addressesForCoin.add(new ServerAddress("ele3.bitcore.cc", 50002));
             addressesForCoin.add(new ServerAddress("ele4.bitcore.cc", 50002));
         } else if (coinType instanceof BitsendMain) {
-            addressesForCoin.add(new ServerAddress("ele1.bitsend.info", 50002));
+            addressesForCoin.add(new ServerAddress("ele1.bitsend.cc", 50002));
         } else if (coinType instanceof BitcloudMain) {
             addressesForCoin.add(new ServerAddress("ele1.bit-cloud.info", 50002));
         } else if (coinType instanceof MegacoinMain) {
