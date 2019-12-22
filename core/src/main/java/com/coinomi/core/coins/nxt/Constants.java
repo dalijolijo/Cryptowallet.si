@@ -91,10 +91,10 @@ public final class Constants {
     //  "link": "http://p1.cryptowallet.si"
     // },
     //]
-    public static final String PARTNERS_URI_OVERVIEW = "http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com/partner1.json";
-    public static final String PARTNERS_URI_BTX = "http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com/partner2.json";
-    public static final String PARTNERS_URI_BSD = "http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com/partner3.json";
-    public static final String PARTNERS_URI_BTDX = "http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com/partner4.json";
-    public static final String PARTNERS_URI_MEC = "http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com/partner5.json";
+    public static final String PARTNERS_URI_OVERVIEW = "http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com/limxtec.json";
+    public static final String PARTNERS_URI_BTX = "http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com/btx.json";
+    public static final String PARTNERS_URI_BSD = "http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com/bsd.json";
+    public static final String PARTNERS_URI_BTDX = "http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com/btdx.json";
+    public static final String PARTNERS_URI_MEC = "http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com/mec.json";
 }
 
