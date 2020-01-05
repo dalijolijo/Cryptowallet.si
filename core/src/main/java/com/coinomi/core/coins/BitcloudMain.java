@@ -36,6 +36,6 @@ public class BitcloudMain extends BitFamily implements PartnersInfoData {
     }
     @Override
     public String getPartnerUrl() {
-        return Constants.PARTNERS_URI_MEC;
+        return Constants.PARTNERS_URI_BTDX;
     }
 }
