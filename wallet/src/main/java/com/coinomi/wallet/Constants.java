@@ -135,20 +135,20 @@ public class Constants {
     private static CoinAddress getCoinAddress(CoinType coinType, boolean filterEnabled) {
         ArrayList<ServerAddress> addressesForCoin = new ArrayList<>();
         if (coinType instanceof BitcoreMain) {
-            addressesForCoin.add(new ServerAddress("http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50001));
-            addressesForCoin.add(new ServerAddress("http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50002));
+            addressesForCoin.add(new ServerAddress("c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50001));
+            addressesForCoin.add(new ServerAddress("c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50002));
             //addressesForCoin.add(new ServerAddress("ele1.bitcore.cc", 50002));
         } else if (coinType instanceof BitsendMain) {
-            addressesForCoin.add(new ServerAddress("http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50001));
-            addressesForCoin.add(new ServerAddress("http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50002));
+            addressesForCoin.add(new ServerAddress("c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50001));
+            addressesForCoin.add(new ServerAddress("c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50002));
             //addressesForCoin.add(new ServerAddress("ele1.bitsend.cc", 50002));
         } else if (coinType instanceof BitcloudMain) {
-            addressesForCoin.add(new ServerAddress("http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50001));
-            addressesForCoin.add(new ServerAddress("http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50002));
+            addressesForCoin.add(new ServerAddress("c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50001));
+            addressesForCoin.add(new ServerAddress("c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50002));
             //addressesForCoin.add(new ServerAddress("ele1.bit-cloud.info", 50002));
         } else if (coinType instanceof MegacoinMain) {
-            addressesForCoin.add(new ServerAddress("http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50001));
-            addressesForCoin.add(new ServerAddress("http://c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50002));
+            addressesForCoin.add(new ServerAddress("c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50001));
+            addressesForCoin.add(new ServerAddress("c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50002));
             //addressesForCoin.add(new ServerAddress("ele1.megacoin.eu", 50002));
         }
 
