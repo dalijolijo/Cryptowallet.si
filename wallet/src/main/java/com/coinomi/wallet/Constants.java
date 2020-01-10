@@ -137,7 +137,10 @@ public class Constants {
         if (coinType instanceof BitcoreMain) {
             addressesForCoin.add(new ServerAddress("c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50001));
             addressesForCoin.add(new ServerAddress("c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50002));
-            //addressesForCoin.add(new ServerAddress("ele1.bitcore.cc", 50002));
+            addressesForCoin.add(new ServerAddress("51.158.182.210", 50001));
+            addressesForCoin.add(new ServerAddress("ele1.bitcore.cc", 50001));
+            addressesForCoin.add(new ServerAddress("ele1.bitcore.cc", 50002));
+            addressesForCoin.add(new ServerAddress("51.15.222.224", 50001));
         } else if (coinType instanceof BitsendMain) {
             addressesForCoin.add(new ServerAddress("c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50001));
             addressesForCoin.add(new ServerAddress("c909a383-8278-4017-968e-7cadd18d6496.pub.cloud.scaleway.com", 50002));
